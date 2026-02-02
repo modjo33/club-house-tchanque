@@ -1,22 +1,4 @@
 module ApplicationHelper
-  def default_meta_tags
-    {
-      site: "Club House Tchanqué",
-      separator: "|",
-      reverse: true,
-      charset: "utf-8",
-      viewport: "width=device-width, initial-scale=1",
-      og: {
-        site_name: "Club House Tchanqué",
-        type: "website",
-        locale: "fr_FR"
-      },
-      twitter: {
-        card: "summary_large_image"
-      }
-    }
-  end
-
   def restaurant_json_ld
     {
       "@context": "https://schema.org",

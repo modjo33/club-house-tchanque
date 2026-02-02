@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
   <head>
-    <%= display_meta_tags(default_meta_tags) %>
+    <meta charset="utf-8">
+    <title><%= @page_title || "Club House Tchanqué - Restaurant du Golf" %></title>
+    <meta name="description" content="<%= @page_description || "Club House Tchanqué - Restaurant du Golf de Villenave-d'Ornon. Cuisine française traditionnelle, terrasse avec vue sur le golf." %>">
+    <meta name="keywords" content="<%= @page_keywords || "restaurant, golf, villenave d'ornon, bordeaux" %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Club House Tchanqué">
+    <meta property="og:title" content="<%= @page_title || "Club House Tchanqué" %>">
+    <meta property="og:description" content="<%= @page_description || "Restaurant du Golf de Villenave-d'Ornon" %>">
+    <meta property="og:url" content="<%= request.original_url %>">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= @page_title || "Club House Tchanqué" %>">
+    <meta name="twitter:description" content="<%= @page_description || "Restaurant du Golf de Villenave-d'Ornon" %>">
 
     <%= yield :head %>
 
