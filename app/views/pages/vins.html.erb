@@ -1,4 +1,20 @@
-<% content_for(:title, "La Carte des Vins - Club House Tchanqué") %>
+<%
+set_meta_tags(
+  title: "La carte des vins - Club House Tchanqué",
+  description: "Notre sélection de vins blancs, rosés, rouges et champagne au Club House Tchanqué. Vins de Bordeaux, Pessac-Léognan, Côtes du Rhône et plus encore.",
+  keywords: "carte des vins, vins, bordeaux, pessac-léognan, côtes du rhône, champagne, vin rouge, vin blanc, rosé, restaurant",
+  og: {
+    title: "La carte des vins - Club House Tchanqué",
+    description: "Découvrez notre sélection de vins : Bordeaux, Pessac-Léognan, Côtes du Rhône et champagne.",
+    url: request.original_url,
+    image: ""
+  },
+  twitter: {
+    title: "Carte des vins - Club House Tchanqué",
+    description: "Vins blancs, rosés, rouges et champagne. Sélection bordelaise et plus encore."
+  }
+)
+%>
 
 <!-- En-tête -->
 <section class="relative py-24 bg-gradient-to-br from-forest-900 via-forest-800 to-forest-700">

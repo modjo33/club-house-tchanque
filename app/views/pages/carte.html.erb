@@ -1,4 +1,20 @@
-<% content_for(:title, "La Carte - Club House Tchanqué") %>
+<%
+set_meta_tags(
+  title: "La carte du restaurant - Club House Tchanqué",
+  description: "Découvrez la carte du restaurant Club House Tchanqué : entrées, plats, desserts, formules du jour et menu enfant. Cuisine de produits frais et de saison à Villenave d'Ornon.",
+  keywords: "carte, menu, restaurant, plats, entrées, desserts, formule, villenave d'ornon, cuisine française, produits frais",
+  og: {
+    title: "La carte du restaurant - Club House Tchanqué",
+    description: "Découvrez notre carte : entrées, plats, desserts et formules du jour. Cuisine de produits frais.",
+    url: request.original_url,
+    image: ""
+  },
+  twitter: {
+    title: "La carte - Club House Tchanqué",
+    description: "Carte du restaurant avec entrées, plats, desserts et formules. Produits frais et de saison."
+  }
+)
+%>
 
 <!-- Hero -->
 <section class="relative py-32 bg-gradient-to-br from-forest-800 to-forest-600">

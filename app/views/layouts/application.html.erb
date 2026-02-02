@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html class="scroll-smooth">
+<html lang="fr" class="scroll-smooth">
   <head>
-    <title><%= content_for(:title) || "Club House Tchanqué - Restaurant du Golf" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= display_meta_tags(default_meta_tags) %>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="description" content="Club House Tchanqué - Restaurant du Golf de Villenave-d'Ornon. Cuisine française traditionnelle, terrasse avec vue sur le golf.">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= yield :head %>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="<%= request.original_url.split('?').first %>">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      <%= raw restaurant_json_ld %>
+    </script>
 
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon.png" type="image/png">

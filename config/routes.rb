@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   get "/la-carte", to: "pages#carte", as: :carte
   get "/la-carte-des-vins", to: "pages#vins", as: :vins
   get "/nos-evenements", to: "pages#evenements", as: :evenements
+
+  # SEO
+  get "/sitemap.xml", to: "sitemaps#show", as: :sitemap, defaults: { format: :xml }
 end

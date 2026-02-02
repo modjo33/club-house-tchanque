@@ -1,4 +1,20 @@
-<% content_for(:title, "Salle de réunion & Événements - Club House Tchanqué") %>
+<%
+set_meta_tags(
+  title: "Salle de réunion et événements - Club House Tchanqué",
+  description: "Organisez vos réunions, séminaires et événements privés au Club House Tchanqué. Salle Birdie de 40m2 avec vue sur le golf, vidéo-projecteur et wifi. Jusqu'à 30 personnes.",
+  keywords: "salle de réunion, séminaire, événements, privatisation, anniversaire, baptême, entreprise, villenave d'ornon, bordeaux, golf",
+  og: {
+    title: "Salle de réunion et événements - Club House Tchanqué",
+    description: "Salle Birdie de 40m2 pour vos réunions et événements. Vue sur le golf, jusqu'à 30 personnes.",
+    url: request.original_url,
+    image: ""
+  },
+  twitter: {
+    title: "Événements - Club House Tchanqué",
+    description: "Réunions, séminaires, anniversaires. Salle privative de 40m2 avec vue sur le golf."
+  }
+)
+%>
 
 <!-- En-tête -->
 <section class="relative py-24 bg-gradient-to-br from-forest-900 via-forest-800 to-forest-700">

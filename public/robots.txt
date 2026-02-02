@@ -1,1 +1,11 @@
 # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://club-house-tchanque.com/sitemap.xml
+
+# Disallow admin and system paths
+Disallow: /rails/
+Disallow: /up
