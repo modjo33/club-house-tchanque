@@ -82,4 +82,14 @@
   .btn-secondary {
     @apply inline-block border-2 border-gold-400 text-gold-400 font-semibold px-8 py-3 rounded-lg hover:bg-gold-400 hover:text-forest-900 transition-colors;
   }
+
+  /* Text shadow for hero sections */
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Prose styling for content */
+  .prose p {
+    @apply leading-relaxed;
+  }
 }
