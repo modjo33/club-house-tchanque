@@ -1,171 +1,401 @@
-<% content_for(:title, "Nos Événements - Club House Tchanqué") %>
+<% content_for(:title, "Salle de réunion & Événements - Club House Tchanqué") %>
 
-<!-- Hero -->
-<section class="relative py-32 bg-gradient-to-br from-forest-800 to-forest-600">
-  <div class="absolute inset-0 bg-black/20"></div>
+<!-- En-tête -->
+<section class="relative py-24 bg-gradient-to-br from-forest-900 via-forest-800 to-forest-700">
+  <div class="absolute inset-0 bg-black/30"></div>
   <div class="relative z-10 container mx-auto px-4 text-center text-white">
-    <h1 class="text-5xl font-serif font-bold text-gold-400 mb-4">Nos Événements</h1>
-    <p class="text-xl text-cream-100">Célébrez vos moments importants au Club House Tchanqué</p>
+    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4">
+      Découvrez notre <span class="text-gold-400">salle de réunion</span>
+    </h1>
+    <p class="text-xl text-cream-100">Un cadre exceptionnel pour vos événements professionnels et privés</p>
   </div>
 </section>
 
-<!-- Events Content -->
-<section class="py-16 bg-cream-50">
+<!-- Carrousel de photos -->
+<section class="py-12 bg-wood-100" data-controller="carousel">
   <div class="container mx-auto px-4">
+    <div class="relative max-w-5xl mx-auto">
+      <div class="relative h-72 md:h-96 overflow-hidden rounded-xl shadow-2xl">
+        <!-- Slide 1 - Salle de réunion vue générale -->
+        <div class="carousel-slide absolute inset-0 transition-opacity duration-1000" data-carousel-target="slide">
+          <div class="absolute inset-0 bg-gradient-to-br from-forest-700 via-forest-600 to-wood-500">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center text-white/40">
+                <svg class="w-28 h-28 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                <p class="text-lg">Salle de réunion Birdie - Vue générale</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Introduction -->
-    <div class="max-w-3xl mx-auto text-center mb-16">
-      <p class="text-lg text-forest-700 leading-relaxed">
-        Le Club House Tchanqué vous ouvre ses portes pour tous vos événements privés et professionnels.
-        Notre équipe vous accompagne dans l'organisation de moments inoubliables, dans un cadre unique
-        au coeur du golf de Villenave-d'Ornon.
-      </p>
+        <!-- Slide 2 - Configuration réunion -->
+        <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0" data-carousel-target="slide">
+          <div class="absolute inset-0 bg-gradient-to-br from-wood-600 via-wood-500 to-cream-400">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center text-white/50">
+                <svg class="w-28 h-28 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <p class="text-lg">Configuration séminaire</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 - Vue sur le golf -->
+        <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0" data-carousel-target="slide">
+          <div class="absolute inset-0 bg-gradient-to-br from-forest-600 via-forest-500 to-gold-500">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center text-white/40">
+                <svg class="w-28 h-28 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <p class="text-lg">Vue panoramique sur le golf et le lac</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4 - Événement privé -->
+        <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0" data-carousel-target="slide">
+          <div class="absolute inset-0 bg-gradient-to-br from-gold-600 via-gold-500 to-cream-400">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center text-gold-900/40">
+                <svg class="w-28 h-28 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path>
+                </svg>
+                <p class="text-lg">Événement privé - Anniversaire</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="flex justify-center gap-3 mt-6">
+        <button type="button" class="w-3 h-3 rounded-full bg-forest-800 transition-all" data-carousel-target="indicator" data-action="click->carousel#goToSlide" data-index="0"></button>
+        <button type="button" class="w-3 h-3 rounded-full bg-forest-300 hover:bg-forest-500 transition-all" data-carousel-target="indicator" data-action="click->carousel#goToSlide" data-index="1"></button>
+        <button type="button" class="w-3 h-3 rounded-full bg-forest-300 hover:bg-forest-500 transition-all" data-carousel-target="indicator" data-action="click->carousel#goToSlide" data-index="2"></button>
+        <button type="button" class="w-3 h-3 rounded-full bg-forest-300 hover:bg-forest-500 transition-all" data-carousel-target="indicator" data-action="click->carousel#goToSlide" data-index="3"></button>
+      </div>
+
+      <!-- Flèches -->
+      <button type="button" class="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white text-forest-800 shadow-lg transition-colors" data-action="click->carousel#prev" aria-label="Précédent">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white text-forest-800 shadow-lg transition-colors" data-action="click->carousel#next" aria-label="Suivant">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
     </div>
+  </div>
+</section>
 
-    <!-- Types d'événements -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-        <div class="h-48 bg-gradient-to-br from-forest-600 to-forest-800 flex items-center justify-center">
-          <svg class="w-20 h-20 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path>
-          </svg>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-forest-800 mb-3">Anniversaires</h3>
-          <p class="text-forest-600 mb-4">
-            Fêtez votre anniversaire dans un cadre exceptionnel. Menus personnalisés,
-            décoration sur mesure et vue imprenable sur le golf.
-          </p>
-          <p class="text-gold-600 font-semibold">À partir de 35€/personne</p>
-        </div>
+<!-- À propos de notre salle de réunion -->
+<section class="py-20 bg-cream-50">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-4 mb-10">
+        <div class="flex-1 h-px bg-gradient-to-r from-transparent to-gold-400"></div>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-forest-800 text-center">
+          À propos de notre salle de réunion
+        </h2>
+        <div class="flex-1 h-px bg-gradient-to-l from-transparent to-gold-400"></div>
       </div>
 
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-        <div class="h-48 bg-gradient-to-br from-forest-600 to-forest-800 flex items-center justify-center">
-          <svg class="w-20 h-20 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-          </svg>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-forest-800 mb-3">Séminaires</h3>
-          <p class="text-forest-600 mb-4">
-            Un lieu idéal pour vos réunions d'entreprise. Espace modulable,
-            équipements audiovisuels et restauration de qualité.
+      <div class="bg-white rounded-xl shadow-lg p-8 md:p-12">
+        <div class="prose prose-lg max-w-none text-forest-700 space-y-6">
+          <p>
+            Le restaurant Club House Tchanqué met à disposition une <strong class="text-forest-800">salle de réunion de 40m²</strong>, à seulement quelques minutes du centre-ville de Bordeaux ! Vous profiterez de la vue qu'offre notre salle sur le golf et son lac, tout en travaillant. Ainsi, surprenez vos collaborateurs en organisant votre évènement sur-mesure dans un cadre exceptionnel !
           </p>
-          <p class="text-gold-600 font-semibold">Devis sur demande</p>
-        </div>
-      </div>
 
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-        <div class="h-48 bg-gradient-to-br from-forest-600 to-forest-800 flex items-center justify-center">
-          <svg class="w-20 h-20 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-          </svg>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-forest-800 mb-3">Mariages</h3>
-          <p class="text-forest-600 mb-4">
-            Un écrin de verdure pour votre plus beau jour. Cocktail, dîner et soirée
-            dansante dans un cadre romantique et élégant.
+          <p>
+            Confortablement installé, vous profitez d'un espace de travail calme, éclairé naturellement. Pour vous assurer d'avoir tout ce dont vous avez besoin, notre <strong class="text-gold-600">salle Birdie</strong> est équipée d'un vidéo-projecteur, d'une connexion wifi dédiée, et de la climatisation. Enfin, la superficie disponible permet d'accueillir <strong class="text-forest-800">jusqu'à 30 personnes</strong> au maximum. L'agencement de la salle privative dépend du nombre de personnes à installer.
           </p>
-          <p class="text-gold-600 font-semibold">À partir de 85€/personne</p>
         </div>
-      </div>
 
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-        <div class="h-48 bg-gradient-to-br from-forest-600 to-forest-800 flex items-center justify-center">
-          <svg class="w-20 h-20 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-          </svg>
+        <!-- Équipements -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+          <div class="text-center p-4 bg-forest-50 rounded-lg">
+            <div class="w-12 h-12 mx-auto mb-3 bg-forest-600 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium text-forest-800">Vidéo-projecteur</p>
+          </div>
+          <div class="text-center p-4 bg-forest-50 rounded-lg">
+            <div class="w-12 h-12 mx-auto mb-3 bg-forest-600 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium text-forest-800">Wifi dédié</p>
+          </div>
+          <div class="text-center p-4 bg-forest-50 rounded-lg">
+            <div class="w-12 h-12 mx-auto mb-3 bg-forest-600 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium text-forest-800">Lumière naturelle</p>
+          </div>
+          <div class="text-center p-4 bg-forest-50 rounded-lg">
+            <div class="w-12 h-12 mx-auto mb-3 bg-forest-600 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium text-forest-800">Climatisation</p>
+          </div>
         </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-forest-800 mb-3">Repas de groupe</h3>
-          <p class="text-forest-600 mb-4">
-            Associations, clubs, familles... Profitez de menus adaptés
-            pour vos repas de groupe dans une ambiance conviviale.
-          </p>
-          <p class="text-gold-600 font-semibold">À partir de 25€/personne</p>
-        </div>
-      </div>
 
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-        <div class="h-48 bg-gradient-to-br from-forest-600 to-forest-800 flex items-center justify-center">
-          <svg class="w-20 h-20 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-          </svg>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-forest-800 mb-3">Soirées à thème</h3>
-          <p class="text-forest-600 mb-4">
-            Soirées musicales, soirées dégustation, événements saisonniers...
-            Suivez notre actualité pour ne rien manquer !
-          </p>
-          <p class="text-gold-600 font-semibold">Voir programmation</p>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-        <div class="h-48 bg-gradient-to-br from-forest-600 to-forest-800 flex items-center justify-center">
-          <svg class="w-20 h-20 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-forest-800 mb-3">Compétitions golf</h3>
-          <p class="text-forest-600 mb-4">
-            Partenaire du golf, nous assurons la restauration lors des compétitions
-            et tournois. Buffets, cocktails et remises de prix.
-          </p>
-          <p class="text-gold-600 font-semibold">Devis sur demande</p>
+        <!-- Capacité -->
+        <div class="mt-10 flex flex-col md:flex-row items-center justify-center gap-8 p-6 bg-forest-800 rounded-xl text-white">
+          <div class="text-center">
+            <p class="text-4xl font-bold text-gold-400">40m²</p>
+            <p class="text-cream-200">Surface</p>
+          </div>
+          <div class="hidden md:block w-px h-16 bg-forest-600"></div>
+          <div class="text-center">
+            <p class="text-4xl font-bold text-gold-400">30</p>
+            <p class="text-cream-200">Personnes max.</p>
+          </div>
+          <div class="hidden md:block w-px h-16 bg-forest-600"></div>
+          <div class="text-center">
+            <p class="text-4xl font-bold text-gold-400">10 min</p>
+            <p class="text-cream-200">De Bordeaux centre</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Capacité -->
-    <div class="bg-wood-100 rounded-lg p-8 mb-16">
-      <h2 class="text-3xl font-serif font-bold text-forest-800 text-center mb-8">Notre capacité d'accueil</h2>
-      <div class="grid md:grid-cols-3 gap-8 text-center">
-        <div>
-          <div class="text-4xl font-bold text-gold-600 mb-2">80</div>
-          <p class="text-forest-700">places assises en salle</p>
-        </div>
-        <div>
-          <div class="text-4xl font-bold text-gold-600 mb-2">60</div>
-          <p class="text-forest-700">places en terrasse</p>
-        </div>
-        <div>
-          <div class="text-4xl font-bold text-gold-600 mb-2">150</div>
-          <p class="text-forest-700">personnes en cocktail</p>
-        </div>
-      </div>
-    </div>
+<!-- Galerie des configurations -->
+<section class="py-16 bg-wood-100">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl font-serif font-bold text-forest-800 text-center mb-10">
+      Configurations possibles
+    </h2>
 
-    <!-- CTA -->
-    <div class="bg-forest-800 text-white p-12 rounded-lg text-center">
-      <h2 class="text-3xl font-serif font-bold text-gold-400 mb-6">Organisez votre événement</h2>
-      <p class="text-cream-200 mb-8 max-w-2xl mx-auto">
-        Notre équipe est à votre disposition pour étudier votre projet et vous proposer
-        une offre personnalisée adaptée à vos besoins et votre budget.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="tel:0961631527" class="btn-primary">
-          <span class="flex items-center justify-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <!-- Configuration 1 - Table en U -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+        <div class="h-48 bg-gradient-to-br from-forest-600 to-forest-700 flex items-center justify-center">
+          <div class="text-center text-white/40">
+            <svg class="w-20 h-20 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
-            09 61 63 15 27
-          </span>
-        </a>
-        <a href="mailto:sasvmrestaurations@gmail.com" class="btn-secondary">
-          <span class="flex items-center justify-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            <p class="text-sm">Photo à venir</p>
+          </div>
+        </div>
+        <div class="p-5 text-center">
+          <h3 class="font-serif font-bold text-forest-800 text-lg">Configuration en U</h3>
+          <p class="text-forest-600 text-sm mt-1">Idéal pour les réunions interactives</p>
+        </div>
+      </div>
+
+      <!-- Configuration 2 - Théâtre -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+        <div class="h-48 bg-gradient-to-br from-wood-500 to-wood-600 flex items-center justify-center">
+          <div class="text-center text-white/40">
+            <svg class="w-20 h-20 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
-            Nous contacter
-          </span>
-        </a>
+            <p class="text-sm">Photo à venir</p>
+          </div>
+        </div>
+        <div class="p-5 text-center">
+          <h3 class="font-serif font-bold text-forest-800 text-lg">Configuration théâtre</h3>
+          <p class="text-forest-600 text-sm mt-1">Pour les présentations</p>
+        </div>
+      </div>
+
+      <!-- Configuration 3 - Table ronde -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+        <div class="h-48 bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+          <div class="text-center text-white/40">
+            <svg class="w-20 h-20 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <p class="text-sm">Photo à venir</p>
+          </div>
+        </div>
+        <div class="p-5 text-center">
+          <h3 class="font-serif font-bold text-forest-800 text-lg">Configuration banquet</h3>
+          <p class="text-forest-600 text-sm mt-1">Pour les repas d'affaires</p>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
+<!-- Formules réunion -->
+<section class="py-20 bg-cream-50">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-4 mb-10">
+        <div class="flex-1 h-px bg-gradient-to-r from-transparent to-gold-400"></div>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-forest-800 text-center">
+          Nos formules réunion
+        </h2>
+        <div class="flex-1 h-px bg-gradient-to-l from-transparent to-gold-400"></div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 mb-10">
+        <div class="prose prose-lg max-w-none text-forest-700 space-y-6">
+          <p>
+            Pour agrémenter votre journée de réunion, nous vous proposons de <strong class="text-forest-800">créer votre formule</strong>. Ainsi, choisissez d'inclure un petit-déjeuner d'accueil (café, viennoiseries, jus de fruits), une pause rafraichissante (café et jus de fruits), une pause gourmande (café et mignardises sucrées), et enfin, le déjeuner avec ou sans vin.
+          </p>
+          <p class="text-xl font-medium text-forest-800 italic">
+            Choisissez votre formule, communiquez nous votre programme… La Team Tchanqué s'occupe du reste !
+          </p>
+        </div>
+      </div>
+
+      <!-- Formules cards -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow border-t-4 border-gold-400">
+          <div class="w-14 h-14 mx-auto mb-4 bg-gold-100 rounded-full flex items-center justify-center">
+            <svg class="w-7 h-7 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-forest-800 mb-2">Petit-déjeuner d'accueil</h3>
+          <p class="text-forest-600 text-sm">Café, viennoiseries, jus de fruits</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow border-t-4 border-forest-500">
+          <div class="w-14 h-14 mx-auto mb-4 bg-forest-100 rounded-full flex items-center justify-center">
+            <svg class="w-7 h-7 text-forest-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-forest-800 mb-2">Pause rafraîchissante</h3>
+          <p class="text-forest-600 text-sm">Café et jus de fruits</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow border-t-4 border-wood-500">
+          <div class="w-14 h-14 mx-auto mb-4 bg-wood-100 rounded-full flex items-center justify-center">
+            <svg class="w-7 h-7 text-wood-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-forest-800 mb-2">Pause gourmande</h3>
+          <p class="text-forest-600 text-sm">Café et mignardises sucrées</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow border-t-4 border-red-700">
+          <div class="w-14 h-14 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+            <svg class="w-7 h-7 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-forest-800 mb-2">Déjeuner</h3>
+          <p class="text-forest-600 text-sm">Avec ou sans vin</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Événement privé -->
+<section class="py-20 bg-forest-800 text-white">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-4 mb-10">
+        <div class="flex-1 h-px bg-gradient-to-r from-transparent to-gold-400"></div>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-gold-400 text-center">
+          Votre événement privé au Club House Tchanqué
+        </h2>
+        <div class="flex-1 h-px bg-gradient-to-l from-transparent to-gold-400"></div>
+      </div>
+
+      <div class="bg-forest-700/50 rounded-xl p-8 md:p-12 backdrop-blur">
+        <div class="prose prose-lg prose-invert max-w-none space-y-6">
+          <p class="text-cream-100">
+            Nous louons notre salle privative pour des <strong class="text-gold-400">événements privés</strong> tels que des anniversaires, des baptêmes ou des repas de fin d'année. À l'occasion de ces événements particuliers, nous élaborons des <strong class="text-gold-400">menus personnalisés</strong>.
+          </p>
+
+          <p class="text-cream-100">
+            Vous avez même la possibilité de combiner votre repas avec une <strong class="text-gold-400">initiation au golf</strong> !
+          </p>
+
+          <p class="text-cream-100">
+            Si vous souhaitez obtenir des informations complémentaires ou demander un devis pour votre événement, n'hésitez pas à nous contacter par téléphone au <strong class="text-gold-400">09 61 63 15 27</strong> ou par mail à l'adresse suivante : <strong class="text-gold-400">sasvmrestaurations@gmail.com</strong>.
+          </p>
+        </div>
+
+        <!-- Types d'événements -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+          <div class="text-center p-4">
+            <div class="w-16 h-16 mx-auto mb-3 bg-gold-400 rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8 text-forest-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path>
+              </svg>
+            </div>
+            <p class="text-cream-100 font-medium">Anniversaires</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-16 h-16 mx-auto mb-3 bg-gold-400 rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8 text-forest-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <p class="text-cream-100 font-medium">Baptêmes</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-16 h-16 mx-auto mb-3 bg-gold-400 rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8 text-forest-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <p class="text-cream-100 font-medium">Repas de groupe</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-16 h-16 mx-auto mb-3 bg-gold-400 rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8 text-forest-900" fill="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="6" r="2"/>
+                <path d="M12 8c-1.1 0-2 .9-2 2v8h1v-4h2v4h1v-8c0-1.1-.9-2-2-2z"/>
+                <path d="M5.5 18.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5S7 20.83 7 20s-.67-1.5-1.5-1.5z"/>
+              </svg>
+            </div>
+            <p class="text-cream-100 font-medium">Initiation golf</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Contact -->
+<section class="py-16 bg-gold-400">
+  <div class="container mx-auto px-4 text-center">
+    <h3 class="text-2xl md:text-3xl font-serif font-bold text-forest-900 mb-6">
+      Prêt à organiser votre événement ?
+    </h3>
+    <p class="text-forest-800 mb-8 max-w-2xl mx-auto">
+      Contactez-nous pour obtenir un devis personnalisé adapté à vos besoins.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="tel:0961631527" class="btn-cta-dark">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+        </svg>
+        09 61 63 15 27
+      </a>
+      <a href="mailto:sasvmrestaurations@gmail.com" class="btn-cta-dark">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+        sasvmrestaurations@gmail.com
+      </a>
+    </div>
   </div>
 </section>
