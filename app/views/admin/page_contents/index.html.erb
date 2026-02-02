@@ -1,0 +1,37 @@
+<h1 class="text-3xl font-bold text-forest-800 mb-6">Contenus des Pages</h1>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="w-full">
+    <thead class="bg-forest-800 text-white">
+      <tr>
+        <th class="px-4 py-3 text-left">Section</th>
+        <th class="px-4 py-3 text-left">Titre</th>
+        <th class="px-4 py-3 text-left">Aperçu du contenu</th>
+        <th class="px-4 py-3 text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <% @page_contents.each do |content| %>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-3">
+            <span class="bg-forest-100 text-forest-800 px-2 py-1 rounded text-sm">
+              <%= PageContent.slug_options.find { |o| o[1] == content.slug }&.first || content.slug %>
+            </span>
+          </td>
+          <td class="px-4 py-3 font-medium"><%= content.title %></td>
+          <td class="px-4 py-3 text-sm text-gray-600"><%= truncate(content.body, length: 80) %></td>
+          <td class="px-4 py-3 text-right">
+            <%= link_to "Modifier", edit_admin_page_content_path(content), class: "text-forest-600 hover:text-forest-800" %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @page_contents.empty? %>
+        <tr>
+          <td colspan="4" class="px-4 py-8 text-center text-gray-500">
+            Aucun contenu pour le moment. Exécutez <code>rails db:seed</code> pour charger les données initiales.
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin - Club House Tchanqué</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-100 min-h-screen">
+    <!-- Admin Navbar -->
+    <nav class="bg-forest-900 text-white shadow-lg">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-6">
+            <%= link_to admin_root_path, class: "flex items-center gap-2 font-bold text-gold-400" do %>
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              Admin
+            <% end %>
+            <div class="hidden md:flex items-center gap-4">
+              <%= link_to "Dashboard", admin_root_path, class: "text-cream-200 hover:text-gold-400 transition-colors text-sm" %>
+              <%= link_to "Carrousel", admin_carousel_images_path, class: "text-cream-200 hover:text-gold-400 transition-colors text-sm" %>
+              <%= link_to "Carte", admin_menu_items_path, class: "text-cream-200 hover:text-gold-400 transition-colors text-sm" %>
+              <%= link_to "Vins", admin_wine_items_path, class: "text-cream-200 hover:text-gold-400 transition-colors text-sm" %>
+              <%= link_to "Formules", admin_formulas_path, class: "text-cream-200 hover:text-gold-400 transition-colors text-sm" %>
+              <%= link_to "Contenus", admin_page_contents_path, class: "text-cream-200 hover:text-gold-400 transition-colors text-sm" %>
+            </div>
+          </div>
+          <%= link_to "Voir le site", root_path, class: "text-sm text-cream-200 hover:text-gold-400 transition-colors", target: "_blank" %>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="md:hidden bg-forest-800 px-4 py-2">
+      <div class="flex flex-wrap gap-2">
+        <%= link_to "Carrousel", admin_carousel_images_path, class: "text-cream-200 hover:text-gold-400 text-xs px-2 py-1 bg-forest-700 rounded" %>
+        <%= link_to "Carte", admin_menu_items_path, class: "text-cream-200 hover:text-gold-400 text-xs px-2 py-1 bg-forest-700 rounded" %>
+        <%= link_to "Vins", admin_wine_items_path, class: "text-cream-200 hover:text-gold-400 text-xs px-2 py-1 bg-forest-700 rounded" %>
+        <%= link_to "Formules", admin_formulas_path, class: "text-cream-200 hover:text-gold-400 text-xs px-2 py-1 bg-forest-700 rounded" %>
+        <%= link_to "Contenus", admin_page_contents_path, class: "text-cream-200 hover:text-gold-400 text-xs px-2 py-1 bg-forest-700 rounded" %>
+      </div>
+    </div>
+
+    <!-- Flash Messages -->
+    <% if notice %>
+      <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
+        <%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+        <%= alert %>
+      </div>
+    <% end %>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+      <%= yield %>
+    </main>
+  </body>
+</html>

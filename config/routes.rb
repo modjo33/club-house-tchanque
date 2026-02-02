@@ -18,4 +18,14 @@ Rails.application.routes.draw do
 
   # SEO
   get "/sitemap.xml", to: "sitemaps#show", as: :sitemap, defaults: { format: :xml }
+
+  # Admin
+  namespace :admin do
+    root "dashboard#index"
+    resources :carousel_images, except: [:show]
+    resources :menu_items, except: [:show]
+    resources :wine_items, except: [:show]
+    resources :formulas, except: [:show]
+    resources :page_contents, only: [:index, :edit, :update]
+  end
 end

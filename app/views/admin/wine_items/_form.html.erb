@@ -1,0 +1,50 @@
+<%= form_with model: [:admin, @wine_item], class: "space-y-6" do |f| %>
+  <% if @wine_item.errors.any? %>
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+      <ul>
+        <% @wine_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div>
+      <%= f.label :category, "Catégorie", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.select :category, WineItem.category_options, {}, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500" %>
+    </div>
+
+    <div>
+      <%= f.label :position, "Position", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.number_field :position, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500" %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.label :name, "Nom du vin", class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.text_field :name, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500" %>
+  </div>
+
+  <div>
+    <%= f.label :appellation, "Appellation / Région", class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.text_field :appellation, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500" %>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div>
+      <%= f.label :glass_price, "Prix au verre (€)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.number_field :glass_price, step: 0.5, min: 0, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", placeholder: "Laisser vide si non disponible" %>
+    </div>
+
+    <div>
+      <%= f.label :bottle_price, "Prix bouteille (€)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.number_field :bottle_price, step: 0.5, min: 0, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500" %>
+    </div>
+  </div>
+
+  <div class="flex gap-4">
+    <%= f.submit "Enregistrer", class: "bg-forest-600 text-white px-6 py-2 rounded hover:bg-forest-700 transition-colors cursor-pointer" %>
+    <%= link_to "Annuler", admin_wine_items_path, class: "bg-gray-300 text-gray-700 px-6 py-2 rounded hover:bg-gray-400 transition-colors" %>
+  </div>
+<% end %>

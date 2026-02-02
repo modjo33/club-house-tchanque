@@ -1,0 +1,53 @@
+<h1 class="text-3xl font-bold text-forest-800 mb-8">Dashboard Administration</h1>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- Carrousel -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-forest-800">Images Carrousel</h2>
+      <span class="bg-forest-100 text-forest-800 px-3 py-1 rounded-full text-sm font-medium"><%= @carousel_images_count %></span>
+    </div>
+    <p class="text-gray-600 mb-4">Gérez les images des carrousels de chaque page.</p>
+    <%= link_to "Gérer", admin_carousel_images_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
+  </div>
+
+  <!-- Carte -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-forest-800">Carte du Restaurant</h2>
+      <span class="bg-forest-100 text-forest-800 px-3 py-1 rounded-full text-sm font-medium"><%= @menu_items_count %></span>
+    </div>
+    <p class="text-gray-600 mb-4">Gérez les entrées, plats et desserts.</p>
+    <%= link_to "Gérer", admin_menu_items_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
+  </div>
+
+  <!-- Vins -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-forest-800">Carte des Vins</h2>
+      <span class="bg-forest-100 text-forest-800 px-3 py-1 rounded-full text-sm font-medium"><%= @wine_items_count %></span>
+    </div>
+    <p class="text-gray-600 mb-4">Gérez la sélection de vins.</p>
+    <%= link_to "Gérer", admin_wine_items_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
+  </div>
+
+  <!-- Formules -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-forest-800">Formules</h2>
+      <span class="bg-forest-100 text-forest-800 px-3 py-1 rounded-full text-sm font-medium"><%= @formulas_count %></span>
+    </div>
+    <p class="text-gray-600 mb-4">Gérez les formules du restaurant.</p>
+    <%= link_to "Gérer", admin_formulas_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
+  </div>
+
+  <!-- Contenus -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-forest-800">Contenus des Pages</h2>
+      <span class="bg-forest-100 text-forest-800 px-3 py-1 rounded-full text-sm font-medium"><%= @page_contents_count %></span>
+    </div>
+    <p class="text-gray-600 mb-4">Modifiez les textes de présentation.</p>
+    <%= link_to "Gérer", admin_page_contents_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
+  </div>
+</div>

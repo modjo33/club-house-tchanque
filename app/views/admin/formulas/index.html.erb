@@ -1,0 +1,37 @@
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-3xl font-bold text-forest-800">Formules</h1>
+  <%= link_to "Ajouter une formule", new_admin_formula_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors" %>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="w-full">
+    <thead class="bg-forest-800 text-white">
+      <tr>
+        <th class="px-4 py-3 text-left">Pos.</th>
+        <th class="px-4 py-3 text-left">Nom</th>
+        <th class="px-4 py-3 text-left">Description</th>
+        <th class="px-4 py-3 text-right">Prix</th>
+        <th class="px-4 py-3 text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <% @formulas.each do |formula| %>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-3 text-gray-500"><%= formula.position %></td>
+          <td class="px-4 py-3 font-medium"><%= formula.name %></td>
+          <td class="px-4 py-3 text-sm text-gray-600"><%= truncate(formula.description, length: 60) %></td>
+          <td class="px-4 py-3 text-right font-semibold text-gold-600"><%= formula.formatted_price %></td>
+          <td class="px-4 py-3 text-right">
+            <%= link_to "Modifier", edit_admin_formula_path(formula), class: "text-forest-600 hover:text-forest-800 mr-3" %>
+            <%= link_to "Supprimer", admin_formula_path(formula), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" }, class: "text-red-600 hover:text-red-800" %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @formulas.empty? %>
+        <tr>
+          <td colspan="5" class="px-4 py-8 text-center text-gray-500">Aucune formule pour le moment.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,43 @@
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-3xl font-bold text-forest-800">Images du Carrousel</h1>
+  <%= link_to "Ajouter une image", new_admin_carousel_image_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors" %>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="w-full">
+    <thead class="bg-forest-800 text-white">
+      <tr>
+        <th class="px-4 py-3 text-left">Image</th>
+        <th class="px-4 py-3 text-left">Page</th>
+        <th class="px-4 py-3 text-left">Position</th>
+        <th class="px-4 py-3 text-left">Alt Text</th>
+        <th class="px-4 py-3 text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <% @carousel_images.each do |image| %>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-3">
+            <% if image.image.attached? %>
+              <%= image_tag image.image.variant(resize_to_limit: [100, 60]), class: "rounded" %>
+            <% else %>
+              <span class="text-gray-400">Pas d'image</span>
+            <% end %>
+          </td>
+          <td class="px-4 py-3 capitalize"><%= image.page %></td>
+          <td class="px-4 py-3"><%= image.position %></td>
+          <td class="px-4 py-3 text-sm text-gray-600"><%= image.alt_text %></td>
+          <td class="px-4 py-3 text-right">
+            <%= link_to "Modifier", edit_admin_carousel_image_path(image), class: "text-forest-600 hover:text-forest-800 mr-3" %>
+            <%= link_to "Supprimer", admin_carousel_image_path(image), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" }, class: "text-red-600 hover:text-red-800" %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @carousel_images.empty? %>
+        <tr>
+          <td colspan="5" class="px-4 py-8 text-center text-gray-500">Aucune image pour le moment.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
