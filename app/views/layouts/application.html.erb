@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="scroll-smooth">
+  <head>
+    <title><%= content_for(:title) || "Club House Tchanqué - Restaurant du Golf" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="Club House Tchanqué - Restaurant du Golf de Villenave-d'Ornon. Cuisine française traditionnelle, terrasse avec vue sur le golf.">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="font-sans bg-cream-50 text-forest-800" id="top">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-forest-900/95 backdrop-blur-sm shadow-lg" data-controller="navbar">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-20">
+          <!-- Logo -->
+          <%= link_to root_path, class: "flex items-center gap-3" do %>
+            <div class="w-12 h-12 bg-gold-400 rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8 text-forest-900" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+            </div>
+            <div class="hidden sm:block">
+              <span class="text-gold-400 font-serif text-xl font-bold">Club House</span>
+              <span class="text-cream-100 font-serif text-xl">Tchanqué</span>
+            </div>
+          <% end %>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center gap-8">
+            <%= link_to "Accueil", root_path, class: "nav-link #{current_page?(root_path) ? 'nav-link-active' : ''}" %>
+            <%= link_to "La carte", carte_path, class: "nav-link #{current_page?(carte_path) ? 'nav-link-active' : ''}" %>
+            <%= link_to "Carte des vins", vins_path, class: "nav-link #{current_page?(vins_path) ? 'nav-link-active' : ''}" %>
+            <%= link_to "Nos événements", evenements_path, class: "nav-link #{current_page?(evenements_path) ? 'nav-link-active' : ''}" %>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button type="button" class="md:hidden text-cream-100 hover:text-gold-400 transition-colors" data-action="click->navbar#toggleMenu" aria-label="Menu">
+            <svg class="w-8 h-8" data-navbar-target="menuIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg class="w-8 h-8 hidden" data-navbar-target="closeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden pb-6" data-navbar-target="mobileMenu">
+          <div class="flex flex-col gap-4">
+            <%= link_to "Accueil", root_path, class: "mobile-nav-link #{current_page?(root_path) ? 'mobile-nav-link-active' : ''}" %>
+            <%= link_to "La carte", carte_path, class: "mobile-nav-link #{current_page?(carte_path) ? 'mobile-nav-link-active' : ''}" %>
+            <%= link_to "Carte des vins", vins_path, class: "mobile-nav-link #{current_page?(vins_path) ? 'mobile-nav-link-active' : ''}" %>
+            <%= link_to "Nos événements", evenements_path, class: "mobile-nav-link #{current_page?(evenements_path) ? 'mobile-nav-link-active' : ''}" %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+      <%= yield %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-forest-900 text-cream-100">
+      <!-- Main Footer -->
+      <div class="container mx-auto px-4 py-16">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <!-- Contact -->
+          <div>
+            <h3 class="text-gold-400 font-serif text-xl font-bold mb-6">Contact</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-gold-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span class="text-sm">
+                  Club House Tchanqué<br>
+                  Restaurant du Golf<br>
+                  43 Avenue Mirieu de Labarre<br>
+                  33140 Villenave-d'Ornon
+                </span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+                <a href="tel:0961631527" class="text-sm hover:text-gold-400 transition-colors">09 61 63 15 27</a>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                <a href="mailto:sasvmrestaurations@gmail.com" class="text-sm hover:text-gold-400 transition-colors break-all">sasvmrestaurations@gmail.com</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Horaires -->
+          <div>
+            <h3 class="text-gold-400 font-serif text-xl font-bold mb-6">Horaires</h3>
+            <div class="bg-forest-800 rounded-lg p-4">
+              <p class="text-cream-200 mb-2">Ouvert tous les jours</p>
+              <p class="text-2xl font-bold text-gold-400">8h - 19h</p>
+            </div>
+            <div class="mt-6">
+              <a href="https://jouer.golf/golf/ugolf-villenave-dornon/" target="_blank" rel="noopener" class="flex items-center gap-3 p-3 bg-forest-800 rounded-lg hover:bg-forest-700 transition-colors">
+                <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <svg class="w-8 h-8 text-forest-700" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="6" r="2"/>
+                    <path d="M12 8c-1.1 0-2 .9-2 2v8h1v-4h2v4h1v-8c0-1.1-.9-2-2-2zM5.5 18.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5S7 20.83 7 20s-.67-1.5-1.5-1.5z"/>
+                    <path d="M5.5 16c-1.38 0-2.5 1.12-2.5 2.5S4.12 21 5.5 21s2.5-1.12 2.5-2.5S6.88 16 5.5 16zM12 2L4 6v2l8-4 8 4V6l-8-4z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-cream-300">Notre partenaire</p>
+                  <p class="text-sm font-semibold text-gold-400">UGolf Villenave-d'Ornon</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Réseaux sociaux -->
+          <div>
+            <h3 class="text-gold-400 font-serif text-xl font-bold mb-6">Suivez-nous</h3>
+            <div class="flex flex-col gap-4">
+              <a href="https://www.facebook.com/profile.php?id=100063508872441" target="_blank" rel="noopener" class="flex items-center gap-3 hover:text-gold-400 transition-colors">
+                <div class="w-10 h-10 bg-forest-800 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </div>
+                <span class="text-sm">Facebook</span>
+              </a>
+              <a href="https://www.instagram.com/clubhousetchanque/" target="_blank" rel="noopener" class="flex items-center gap-3 hover:text-gold-400 transition-colors">
+                <div class="w-10 h-10 bg-forest-800 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                  </svg>
+                </div>
+                <span class="text-sm">Instagram</span>
+              </a>
+              <a href="https://www.tripadvisor.fr/Restaurant_Review-g1025628-d13456505-Reviews-Club_House_Tchanque-Villenave_D_ornon_Bordeaux_Gironde_Nouvelle_Aquitaine.html" target="_blank" rel="noopener" class="flex items-center gap-3 hover:text-gold-400 transition-colors">
+                <div class="w-10 h-10 bg-forest-800 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 004.04 10.43 5.976 5.976 0 004.075-1.6L12 19.705l1.922-2.09a5.972 5.972 0 004.072 1.598 6 6 0 004.041-10.43L24 6.647h-4.35a13.573 13.573 0 00-7.644-2.352zM12 6.807c1.822 0 3.596.422 5.212 1.225a5.965 5.965 0 00-2.207 2.199 5.965 5.965 0 00-2.207-2.199A11.048 11.048 0 0112 6.807zm-6 2.422a3.995 3.995 0 110 7.99 3.995 3.995 0 010-7.99zm12 0a3.995 3.995 0 110 7.99 3.995 3.995 0 010-7.99zM6 11.727a1.997 1.997 0 100 3.994 1.997 1.997 0 000-3.994zm12 0a1.997 1.997 0 100 3.994 1.997 1.997 0 000-3.994z"/>
+                  </svg>
+                </div>
+                <span class="text-sm">TripAdvisor</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Google Maps -->
+          <div>
+            <h3 class="text-gold-400 font-serif text-xl font-bold mb-6">Nous trouver</h3>
+            <div class="rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2832.7847927123!2d-0.5515!3d44.7636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54d9a8b7d4c5c7%3A0x0!2s43%20Avenue%20Mirieu%20de%20Labarre%2C%2033140%20Villenave-d&#39;Ornon!5e0!3m2!1sfr!2sfr!4v1600000000000!5m2!1sfr!2sfr"
+                width="100%"
+                height="200"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Google Maps - Club House Tchanqué"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Footer -->
+      <div class="border-t border-forest-700">
+        <div class="container mx-auto px-4 py-6">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-sm text-cream-300">
+              &copy; <%= Date.today.year %> Club House Tchanqué - Tous droits réservés
+            </p>
+            <a href="#top" class="flex items-center gap-2 text-gold-400 hover:text-gold-300 transition-colors">
+              <span class="text-sm">Retour en haut</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/* Custom theme for Club House Tchanqué */
+@theme {
+  /* Forest Green - Nature/Golf inspired */
+  --color-forest-50: #f0f7f0;
+  --color-forest-100: #dcebdc;
+  --color-forest-200: #b8d7b8;
+  --color-forest-300: #8abd8a;
+  --color-forest-400: #5d9e5d;
+  --color-forest-500: #3d7d3d;
+  --color-forest-600: #2d632d;
+  --color-forest-700: #244f24;
+  --color-forest-800: #1e3f1e;
+  --color-forest-900: #0f240f;
+
+  /* Gold - Elegant accents */
+  --color-gold-50: #fefce8;
+  --color-gold-100: #fef9c3;
+  --color-gold-200: #fef08a;
+  --color-gold-300: #fde047;
+  --color-gold-400: #d4a520;
+  --color-gold-500: #b8941e;
+  --color-gold-600: #9a7b19;
+  --color-gold-700: #7c6314;
+  --color-gold-800: #5e4a0f;
+  --color-gold-900: #3f320a;
+
+  /* Cream - Warm backgrounds */
+  --color-cream-50: #fefdfb;
+  --color-cream-100: #fdf9f3;
+  --color-cream-200: #f9f1e4;
+  --color-cream-300: #f3e6d1;
+  --color-cream-400: #ebd8ba;
+  --color-cream-500: #d4c4a8;
+  --color-cream-600: #b8a88c;
+  --color-cream-700: #9c8c70;
+  --color-cream-800: #806f54;
+  --color-cream-900: #645338;
+
+  /* Wood - Warm natural tones */
+  --color-wood-50: #faf7f4;
+  --color-wood-100: #f0e9e0;
+  --color-wood-200: #e0d3c4;
+  --color-wood-300: #c9b8a3;
+  --color-wood-400: #b09878;
+  --color-wood-500: #8b7355;
+  --color-wood-600: #6e5a43;
+  --color-wood-700: #574736;
+  --color-wood-800: #40342a;
+  --color-wood-900: #29211b;
+
+  /* Typography */
+  --font-sans: "Open Sans", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+}
+
+/* Custom component styles */
+@layer components {
+  /* Navigation links */
+  .nav-link {
+    @apply text-cream-200 hover:text-gold-400 transition-colors font-medium;
+  }
+
+  .nav-link-active {
+    @apply text-gold-400;
+  }
+
+  .mobile-nav-link {
+    @apply block py-2 px-4 text-cream-200 hover:text-gold-400 hover:bg-forest-800 rounded-lg transition-colors;
+  }
+
+  .mobile-nav-link-active {
+    @apply text-gold-400 bg-forest-800;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-block bg-gold-400 text-forest-900 font-semibold px-8 py-3 rounded-lg hover:bg-gold-300 transition-colors shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply inline-block border-2 border-gold-400 text-gold-400 font-semibold px-8 py-3 rounded-lg hover:bg-gold-400 hover:text-forest-900 transition-colors;
+  }
+}
