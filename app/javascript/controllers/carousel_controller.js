@@ -9,13 +9,49 @@ export default class extends Controller {
 
   connect() {
     this.currentIndex = 0
+    this.touchStartX = 0
+    this.touchEndX = 0
+
     if (this.autoplayValue) {
       this.startAutoPlay()
     }
+
+    // Add touch event listeners for swipe
+    this.element.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true })
+    this.element.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: true })
   }
 
   disconnect() {
     this.stopAutoPlay()
+    this.element.removeEventListener('touchstart', this.handleTouchStart.bind(this))
+    this.element.removeEventListener('touchend', this.handleTouchEnd.bind(this))
+  }
+
+  // Touch/Swipe handling
+  handleTouchStart(event) {
+    this.touchStartX = event.changedTouches[0].screenX
+  }
+
+  handleTouchEnd(event) {
+    this.touchEndX = event.changedTouches[0].screenX
+    this.handleSwipe()
+  }
+
+  handleSwipe() {
+    const swipeThreshold = 50
+    const diff = this.touchStartX - this.touchEndX
+
+    if (Math.abs(diff) > swipeThreshold) {
+      this.stopAutoPlay()
+      if (diff > 0) {
+        // Swipe left - next slide
+        this.next()
+      } else {
+        // Swipe right - previous slide
+        this.prev()
+      }
+      this.startAutoPlay()
+    }
   }
 
   startAutoPlay() {
@@ -46,6 +82,8 @@ export default class extends Controller {
   }
 
   goTo(index) {
+    if (this.slideTargets.length === 0) return
+
     // Hide current slide
     this.slideTargets[this.currentIndex].classList.add("opacity-0")
     this.updateIndicator(this.currentIndex, false)
@@ -66,7 +104,6 @@ export default class extends Controller {
 
     if (active) {
       inactiveClasses.forEach(cls => indicator.classList.remove(cls))
-      // Determine which active class to use based on existing classes
       if (indicator.classList.contains("bg-forest-800") || indicator.classList.contains("bg-forest-300")) {
         indicator.classList.add("bg-forest-800")
       } else {
@@ -74,7 +111,6 @@ export default class extends Controller {
       }
     } else {
       activeClasses.forEach(cls => indicator.classList.remove(cls))
-      // Determine which inactive class to use
       if (indicator.className.includes("forest")) {
         indicator.classList.add("bg-forest-300")
       } else {

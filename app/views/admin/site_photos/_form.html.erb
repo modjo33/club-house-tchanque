@@ -1,0 +1,59 @@
+<%= form_with model: [:admin, @site_photo], class: "space-y-6" do |f| %>
+  <% if @site_photo.errors.any? %>
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+      <ul>
+        <% @site_photo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :location %>
+
+  <div class="bg-gray-50 rounded-lg p-4">
+    <p class="font-medium text-forest-800"><%= @location_info[:label] %></p>
+    <p class="text-sm text-gray-600 mt-1"><%= @location_info[:description] %></p>
+  </div>
+
+  <div>
+    <%= f.label :image, "Image", class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <% if @site_photo.image.attached? %>
+      <div class="mb-3">
+        <%= image_tag @site_photo.image, class: "h-40 w-auto rounded shadow" %>
+        <p class="text-sm text-gray-500 mt-1">Image actuelle</p>
+      </div>
+    <% end %>
+    <%= f.file_field :image, accept: "image/*", class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", required: @site_photo.new_record? %>
+    <p class="text-xs text-gray-500 mt-1">Formats acceptés : JPG, PNG. Taille recommandée : 1920x1080 pour les heroes, 800x600 pour les autres.</p>
+  </div>
+
+  <div>
+    <%= f.label :alt_text, "Description de l'image (texte alternatif)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.text_field :alt_text, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", placeholder: "Ex: Vue de la terrasse sur le lac" %>
+    <p class="text-xs text-gray-500 mt-1">Décrivez l'image pour l'accessibilité et le référencement</p>
+  </div>
+
+  <% if @location_info[:type] != :single %>
+    <div>
+      <%= f.label :position, "Position (ordre d'affichage)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.number_field :position, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", min: 0, value: @site_photo.position || @existing_count || 0 %>
+      <p class="text-xs text-gray-500 mt-1">0 = première image, 1 = deuxième, etc.</p>
+    </div>
+  <% else %>
+    <%= f.hidden_field :position, value: 0 %>
+  <% end %>
+
+  <div class="flex gap-4 pt-4">
+    <%= f.submit @site_photo.new_record? ? "Ajouter l'image" : "Enregistrer", class: "bg-forest-600 text-white px-6 py-2 rounded hover:bg-forest-700 transition-colors cursor-pointer" %>
+    <%= link_to "Annuler", admin_site_photos_path, class: "bg-gray-300 text-gray-700 px-6 py-2 rounded hover:bg-gray-400 transition-colors" %>
+
+    <% if @site_photo.persisted? %>
+      <div class="flex-1 text-right">
+        <%= link_to "Supprimer cette image", admin_site_photo_path(@site_photo), method: :delete,
+            data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette image ?" },
+            class: "text-red-600 hover:text-red-800" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -41,6 +41,6 @@ class Admin::CarouselImagesController < Admin::BaseController
   end
 
   def carousel_image_params
-    params.require(:carousel_image).permit(:page, :position, :alt_text, :image)
+    params.require(:carousel_image).permit(:page, :section, :position, :alt_text, :image)
   end
 end

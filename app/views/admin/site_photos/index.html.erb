@@ -1,0 +1,133 @@
+<h1 class="text-3xl font-bold text-forest-800 mb-2">Photos du site</h1>
+<p class="text-gray-600 mb-8">Gérez toutes les images affichées sur le site</p>
+
+<% SitePhoto.grouped_by_page.each do |page_name, locations| %>
+  <div class="mb-10">
+    <h2 class="text-xl font-bold text-forest-700 mb-4 pb-2 border-b-2 border-forest-200">
+      <%= page_name %>
+    </h2>
+
+    <div class="space-y-4">
+      <% locations.each do |location_key, info| %>
+        <% photos = @photos_by_location[location_key] || [] %>
+        <div class="bg-white rounded-lg shadow p-4">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <h3 class="font-semibold text-forest-800"><%= info[:label].split(" - ").last %></h3>
+              <p class="text-sm text-gray-500 mt-1"><%= info[:description] %></p>
+
+              <% if info[:type] == :single %>
+                <span class="inline-block mt-2 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">1 image</span>
+              <% elsif info[:type] == :gallery %>
+                <span class="inline-block mt-2 text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">Galerie (<%= info[:count] %> images)</span>
+              <% else %>
+                <span class="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Carrousel (illimité)</span>
+              <% end %>
+            </div>
+
+            <%# Aperçu des images %>
+            <div class="flex items-center gap-2">
+              <% if photos.any? %>
+                <% photos.first(4).each do |photo| %>
+                  <% if photo.image.attached? %>
+                    <%= image_tag photo.image.variant(resize_to_limit: [80, 60]), class: "h-14 w-auto rounded shadow" %>
+                  <% end %>
+                <% end %>
+                <% if photos.size > 4 %>
+                  <span class="text-xs text-gray-500">+<%= photos.size - 4 %></span>
+                <% end %>
+              <% else %>
+                <%# Afficher les images par défaut %>
+                <% defaults = info[:type] == :single ? [info[:default]] : info[:defaults] %>
+                <% defaults&.first(4)&.each do |default_path| %>
+                  <%= image_tag default_path, class: "h-14 w-auto rounded shadow opacity-50", title: "Image par défaut" %>
+                <% end %>
+                <span class="text-xs text-gray-400 ml-2">(par défaut)</span>
+              <% end %>
+            </div>
+
+            <%# Actions %>
+            <div class="flex items-center gap-2">
+              <% if photos.any? %>
+                <%= link_to edit_admin_site_photo_path(photos.first),
+                    class: "text-sm bg-forest-600 text-white px-3 py-1.5 rounded hover:bg-forest-700 transition-colors" do %>
+                  Modifier
+                <% end %>
+              <% end %>
+
+              <% can_add = info[:type] != :single || photos.empty? %>
+              <% can_add = can_add && (info[:type] != :gallery || photos.size < info[:count]) if info[:type] == :gallery %>
+
+              <% if can_add %>
+                <%= link_to new_admin_site_photo_path(location: location_key),
+                    class: "text-sm bg-gold-500 text-white px-3 py-1.5 rounded hover:bg-gold-600 transition-colors" do %>
+                  <% if photos.empty? %>
+                    Ajouter
+                  <% else %>
+                    + Ajouter
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <%# Liste détaillée pour carrousels/galeries avec plusieurs images %>
+          <% if photos.size > 1 %>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+              <div class="flex flex-wrap gap-3">
+                <% photos.each_with_index do |photo, index| %>
+                  <div class="relative group">
+                    <% if photo.image.attached? %>
+                      <%= image_tag photo.image.variant(resize_to_limit: [120, 80]), class: "h-16 w-auto rounded shadow" %>
+                    <% end %>
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded flex items-center justify-center gap-1">
+                      <%= link_to edit_admin_site_photo_path(photo), class: "text-white hover:text-gold-300" do %>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                      <% end %>
+                      <%= link_to admin_site_photo_path(photo), method: :delete,
+                          data: { turbo_method: :delete, turbo_confirm: "Supprimer cette image ?" },
+                          class: "text-white hover:text-red-300" do %>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                      <% end %>
+                    </div>
+                    <span class="absolute -top-2 -left-2 bg-forest-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center"><%= index + 1 %></span>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% elsif photos.size == 1 && !photos.first.location_info[:type].nil? && photos.first.location_info[:type] != :single %>
+            <%# Une seule image mais c'est un carrousel/galerie %>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+              <div class="flex items-center gap-3">
+                <div class="relative group">
+                  <% if photos.first.image.attached? %>
+                    <%= image_tag photos.first.image.variant(resize_to_limit: [120, 80]), class: "h-16 w-auto rounded shadow" %>
+                  <% end %>
+                  <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded flex items-center justify-center gap-1">
+                    <%= link_to admin_site_photo_path(photos.first), method: :delete,
+                        data: { turbo_method: :delete, turbo_confirm: "Supprimer cette image ?" },
+                        class: "text-white hover:text-red-300" do %>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                      </svg>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="mt-8 p-4 bg-blue-50 rounded-lg">
+  <p class="text-sm text-blue-700">
+    <strong>Note :</strong> Les images ajoutées ici remplacent les images par défaut. Si vous supprimez toutes les images d'un emplacement, l'image par défaut sera à nouveau affichée.
+  </p>
+</div>

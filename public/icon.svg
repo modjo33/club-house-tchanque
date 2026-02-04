@@ -1,3 +1,19 @@
-<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="red"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#5d9e5d"/>
+
+  <!-- Inner circle -->
+  <circle cx="32" cy="32" r="26" fill="#1e3f1e"/>
+
+  <!-- Golf flag pole -->
+  <rect x="30" y="16" width="3" height="30" fill="#b5c2a4"/>
+  
+  <!-- Golf flag -->
+  <path d="M33 16 L50 24 L33 32 Z" fill="#96a87f"/>
+
+  <!-- Golf hole -->
+  <ellipse cx="32" cy="48" rx="10" ry="3" fill="#0f240f"/>
+  
+  <!-- Highlight -->
+  <circle cx="24" cy="24" r="4" fill="#8abd8a" opacity="0.3"/>
 </svg>

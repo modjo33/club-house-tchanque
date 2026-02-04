@@ -1,6 +1,26 @@
 <div class="flex items-center justify-between mb-6">
-  <h1 class="text-3xl font-bold text-forest-800">Images du Carrousel</h1>
+  <h1 class="text-3xl font-bold text-forest-800">Images des Carrousels</h1>
   <%= link_to "Ajouter une image", new_admin_carousel_image_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors" %>
+</div>
+
+<div class="mb-6 p-4 bg-blue-50 rounded-lg space-y-2">
+  <p class="text-sm text-blue-700">
+    <strong>Comment ça marche :</strong> Les images ajoutées ici remplacent automatiquement les images par défaut du site.
+  </p>
+  <p class="text-sm text-blue-700">
+    <strong>Sections disponibles :</strong>
+  </p>
+  <ul class="text-sm text-blue-700 list-disc list-inside ml-2">
+    <li><strong>Home - Hero principal</strong> : Grande image d'accueil (1 image recommandée)</li>
+    <li><strong>Home - Section Terrasse</strong> : Galerie de 3 photos de la terrasse</li>
+    <li><strong>Home - Section Événements</strong> : Carrousel des photos d'événements</li>
+    <li><strong>Carte - Hero</strong> : Image de fond de la page carte (1 image)</li>
+    <li><strong>Vins - Carrousel photos</strong> : Photos de la cave à vins</li>
+    <li><strong>Événements - Carrousel principal</strong> : Photos de la salle de réunion</li>
+  </ul>
+  <p class="text-sm text-blue-700">
+    <strong>Position :</strong> Les images sont affichées par ordre croissant (0, 1, 2...). Pour les heroes, seule la première image (position 0) est utilisée.
+  </p>
 </div>
 
 <div class="bg-white rounded-lg shadow overflow-hidden">
@@ -9,33 +29,42 @@
       <tr>
         <th class="px-4 py-3 text-left">Image</th>
         <th class="px-4 py-3 text-left">Page</th>
-        <th class="px-4 py-3 text-left">Position</th>
+        <th class="px-4 py-3 text-left">Section</th>
+        <th class="px-4 py-3 text-center">Position</th>
         <th class="px-4 py-3 text-left">Alt Text</th>
         <th class="px-4 py-3 text-right">Actions</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-200">
-      <% @carousel_images.each do |image| %>
-        <tr class="hover:bg-gray-50">
-          <td class="px-4 py-3">
-            <% if image.image.attached? %>
-              <%= image_tag image.image.variant(resize_to_limit: [100, 60]), class: "rounded" %>
-            <% else %>
-              <span class="text-gray-400">Pas d'image</span>
-            <% end %>
-          </td>
-          <td class="px-4 py-3 capitalize"><%= image.page %></td>
-          <td class="px-4 py-3"><%= image.position %></td>
-          <td class="px-4 py-3 text-sm text-gray-600"><%= image.alt_text %></td>
-          <td class="px-4 py-3 text-right">
-            <%= link_to "Modifier", edit_admin_carousel_image_path(image), class: "text-forest-600 hover:text-forest-800 mr-3" %>
-            <%= link_to "Supprimer", admin_carousel_image_path(image), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" }, class: "text-red-600 hover:text-red-800" %>
+      <% @carousel_images.group_by { |i| [i.page, i.section] }.each do |(page, section), images| %>
+        <tr class="bg-gray-100">
+          <td colspan="6" class="px-4 py-2 font-semibold text-forest-700">
+            <%= page.capitalize %> — <%= section.capitalize %>
           </td>
         </tr>
+        <% images.each do |image| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3">
+              <% if image.image.attached? %>
+                <%= image_tag image.image.variant(resize_to_limit: [100, 60]), class: "rounded" %>
+              <% else %>
+                <span class="text-gray-400">Pas d'image</span>
+              <% end %>
+            </td>
+            <td class="px-4 py-3 capitalize"><%= image.page %></td>
+            <td class="px-4 py-3 capitalize"><%= image.section %></td>
+            <td class="px-4 py-3 text-center"><%= image.position %></td>
+            <td class="px-4 py-3 text-sm text-gray-600"><%= image.alt_text %></td>
+            <td class="px-4 py-3 text-right">
+              <%= link_to "Modifier", edit_admin_carousel_image_path(image), class: "text-forest-600 hover:text-forest-800 mr-3" %>
+              <%= link_to "Supprimer", admin_carousel_image_path(image), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" }, class: "text-red-600 hover:text-red-800" %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
       <% if @carousel_images.empty? %>
         <tr>
-          <td colspan="5" class="px-4 py-8 text-center text-gray-500">Aucune image pour le moment.</td>
+          <td colspan="6" class="px-4 py-8 text-center text-gray-500">Aucune image pour le moment.</td>
         </tr>
       <% end %>
     </tbody>

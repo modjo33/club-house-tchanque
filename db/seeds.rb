@@ -95,46 +95,55 @@ end
 # ============================================
 puts "Creating menu items..."
 
+# Supprimer les anciens items pour repartir à zéro avec les nouvelles données
+MenuItem.destroy_all
+
 [
-  { name: "Salade du Club House", description: "Mesclun, tomates confites, magret fumé, noix et copeaux de parmesan", price: 14, position: 1 },
-  { name: "Velouté de saison", description: "Selon l'inspiration du chef, accompagné de croûtons maison", price: 9, position: 2 },
-  { name: "Foie gras maison", description: "Mi-cuit, chutney de figues et pain toasté", price: 18, position: 3 },
-  { name: "Huîtres du Bassin", description: "6 pièces - Huîtres spéciales du Bassin d'Arcachon", price: 15, position: 4 }
+  { name: "Oeuf Mimosa", description: nil, price: 9, position: 0 },
+  { name: "Camembert Rôti", description: nil, price: 13, position: 1 },
+  { name: "Jambon Serrano", description: nil, price: 15, position: 2 }
 ].each do |item|
-  MenuItem.find_or_create_by!(name: item[:name], category: "entrees") do |mi|
-    mi.description = item[:description]
-    mi.price = item[:price]
-    mi.position = item[:position]
-  end
+  MenuItem.create!(
+    name: item[:name],
+    category: "entrees",
+    description: item[:description],
+    price: item[:price],
+    position: item[:position]
+  )
 end
 
 # PLATS
 [
-  { name: "Entrecôte grillée", description: "300g, sauce au poivre ou échalotes, frites maison", price: 26, position: 1 },
-  { name: "Magret de canard", description: "Sauce aux cèpes, pommes sarladaises", price: 24, position: 2 },
-  { name: "Pavé de saumon", description: "Sauce vierge, riz basmati et légumes de saison", price: 22, position: 3 },
-  { name: "Burger du Club House", description: "Boeuf charolais, bacon, cheddar, oignons confits, frites maison", price: 19, position: 4 },
-  { name: "Plat du jour", description: "Selon l'inspiration du chef - Demandez à votre serveur", price: 16, position: 5 }
+  { name: "Pâtes du Jour", description: "Parmesan, oignon, pignons, piment d'Espelette, huile de Basilic maison", price: 15, position: 0 },
+  { name: "Plat du Jour", description: nil, price: 15, position: 1 },
+  { name: "Salade César", description: nil, price: 19, position: 2 },
+  { name: "Tartare à l'Italienne", description: "Parmesan, oignon, pignons, piment d'Espelette, huile de Basilic maison", price: 21, position: 3 },
+  { name: "Fish and Chips", description: nil, price: 21, position: 4 },
+  { name: "Bô Bun au Poulet Croustillant", description: "Fines noodles, salade romaine, nems de porc sauce Bo bun, cacahuètes, oignons frits", price: 21, position: 5 },
+  { name: "Assiette du Golfeur", description: nil, price: 21, position: 6 }
 ].each do |item|
-  MenuItem.find_or_create_by!(name: item[:name], category: "plats") do |mi|
-    mi.description = item[:description]
-    mi.price = item[:price]
-    mi.position = item[:position]
-  end
+  MenuItem.create!(
+    name: item[:name],
+    category: "plats",
+    description: item[:description],
+    price: item[:price],
+    position: item[:position]
+  )
 end
 
 # DESSERTS
 [
-  { name: "Fondant au chocolat", description: "Coeur coulant, glace vanille", price: 9, position: 1 },
-  { name: "Crème brûlée", description: "À la vanille de Madagascar", price: 8, position: 2 },
-  { name: "Café gourmand", description: "Café accompagné de 3 mignardises du chef", price: 10, position: 3 },
-  { name: "Canelés bordelais", description: "Duo de canelés maison, crème anglaise", price: 8, position: 4 }
+  { name: "Gaufre Liégeoise au Caramel", description: nil, price: 8, position: 0 },
+  { name: "Pavlova au Coulis de Fruits Rouges", description: nil, price: 9, position: 1 },
+  { name: "Café Gourmand", description: nil, price: 10, position: 2 }
 ].each do |item|
-  MenuItem.find_or_create_by!(name: item[:name], category: "desserts") do |mi|
-    mi.description = item[:description]
-    mi.price = item[:price]
-    mi.position = item[:position]
-  end
+  MenuItem.create!(
+    name: item[:name],
+    category: "desserts",
+    description: item[:description],
+    price: item[:price],
+    position: item[:position]
+  )
 end
 
 # ============================================
@@ -142,61 +151,60 @@ end
 # ============================================
 puts "Creating wine items..."
 
+# Supprimer les anciens items pour repartir à zéro avec les nouvelles données
+WineItem.destroy_all
+
+# Vins rouges
+[
+  { name: "Louvetier", appellation: "Bordeaux", glass_price: 6, bottle_price: 26, position: 0 },
+  { name: "El Grano", appellation: "Chilien Carménère", glass_price: 7, bottle_price: 27, position: 1 },
+  { name: "Belleruche", appellation: "Côtes du Rhône", glass_price: nil, bottle_price: 31, position: 2 },
+  { name: "Ch. St Aubin", appellation: "Médoc", glass_price: nil, bottle_price: 32, position: 3 },
+  { name: "Dame de la Solitude", appellation: "Graves", glass_price: nil, bottle_price: 37, position: 4 },
+  { name: "Terrasses de la Garde", appellation: "Pessac-Léognan", glass_price: 9, bottle_price: 39, position: 5 },
+  { name: "Étoile de Nouchet", appellation: "Pessac-Léognan", glass_price: nil, bottle_price: 42, position: 6 },
+  { name: "Meysonniers", appellation: "Crozes Hermitage", glass_price: nil, bottle_price: 43, position: 7 },
+  { name: "Coccinelle Petit Bocq", appellation: "St Estèphe", glass_price: nil, bottle_price: 49, position: 8 }
+].each do |item|
+  WineItem.create!(
+    name: item[:name],
+    category: "rouge",
+    appellation: item[:appellation],
+    glass_price: item[:glass_price],
+    bottle_price: item[:bottle_price],
+    position: item[:position]
+  )
+end
+
 # Vins blancs
 [
-  { name: "Le Louvetier", appellation: "Inspiré par La Louvière, André Lurton", glass_price: 6, bottle_price: 26, position: 1 },
-  { name: "Le Bal des Papillons", appellation: "Côtes de Gascogne", glass_price: 7, bottle_price: 27, position: 2 },
-  { name: "Belleruche", appellation: "Côtes du Rhône", glass_price: 8, bottle_price: 30, position: 3 },
-  { name: "Notre-Dame de la Solitude", appellation: "Graves", glass_price: nil, bottle_price: 36, position: 4 }
+  { name: "Louvetier", appellation: "Bordeaux", glass_price: 6, bottle_price: 26, position: 0 },
+  { name: "Bal des Papillons", appellation: "Côtes de Gascogne", glass_price: 7, bottle_price: 27, position: 1 },
+  { name: "Belleruche", appellation: "Côtes du Rhône", glass_price: 8, bottle_price: 31, position: 2 }
 ].each do |item|
-  WineItem.find_or_create_by!(name: item[:name], category: "blanc") do |wi|
-    wi.appellation = item[:appellation]
-    wi.glass_price = item[:glass_price]
-    wi.bottle_price = item[:bottle_price]
-    wi.position = item[:position]
-  end
+  WineItem.create!(
+    name: item[:name],
+    category: "blanc",
+    appellation: item[:appellation],
+    glass_price: item[:glass_price],
+    bottle_price: item[:bottle_price],
+    position: item[:position]
+  )
 end
 
 # Vins rosés
 [
-  { name: "Le Louvetier", appellation: "Bordeaux, A. Lurton", glass_price: 6, bottle_price: 26, position: 1 },
-  { name: "Les Hauts de Masterel", appellation: "Côtes de Provence", glass_price: 7, bottle_price: 30, position: 2 }
+  { name: "Louvetier", appellation: "Bordeaux", glass_price: 6, bottle_price: 26, position: 0 },
+  { name: "Haut de Masterel", appellation: "Côtes de Provence", glass_price: 7, bottle_price: 30, position: 1 }
 ].each do |item|
-  WineItem.find_or_create_by!(name: item[:name], category: "rose") do |wi|
-    wi.appellation = item[:appellation]
-    wi.glass_price = item[:glass_price]
-    wi.bottle_price = item[:bottle_price]
-    wi.position = item[:position]
-  end
-end
-
-# Vins rouges
-[
-  { name: "Le Louvetier", appellation: "Bordeaux, A. Lurton", glass_price: 6, bottle_price: 26, position: 1 },
-  { name: "Bicicleta", appellation: "Chili, Carménère", glass_price: 7, bottle_price: 27, position: 2 },
-  { name: "Belleruche", appellation: "Côtes du Rhône", glass_price: nil, bottle_price: 30, position: 3 },
-  { name: "Château Saint Aubin", appellation: "Bordeaux", glass_price: nil, bottle_price: 32, position: 4 },
-  { name: "Notre Dame de la Solitude", appellation: "Graves", glass_price: nil, bottle_price: 36, position: 5 },
-  { name: "Châteaux Valoux", appellation: "Pessac Léognan", glass_price: 9, bottle_price: 38, position: 6 },
-  { name: "Étoile by Haut Nouchet", appellation: "Pessac Léognan", glass_price: nil, bottle_price: 42, position: 7 },
-  { name: "Les Meysonniers", appellation: "Crozes Hermitage, M. Chapoutier", glass_price: nil, bottle_price: 43, position: 8 },
-  { name: "La Coccinelle de Petit Bocq", appellation: "Saint-Estèphe", glass_price: nil, bottle_price: 49, position: 9 },
-  { name: "Confidences Prieuré de Lichine", appellation: "Margaux", glass_price: nil, bottle_price: 65, position: 10 }
-].each do |item|
-  WineItem.find_or_create_by!(name: item[:name], category: "rouge") do |wi|
-    wi.appellation = item[:appellation]
-    wi.glass_price = item[:glass_price]
-    wi.bottle_price = item[:bottle_price]
-    wi.position = item[:position]
-  end
-end
-
-# Champagne
-WineItem.find_or_create_by!(name: "Nicolas Feuillatte Brut", category: "champagne") do |wi|
-  wi.appellation = "Champagne"
-  wi.glass_price = nil
-  wi.bottle_price = 60
-  wi.position = 1
+  WineItem.create!(
+    name: item[:name],
+    category: "rose",
+    appellation: item[:appellation],
+    glass_price: item[:glass_price],
+    bottle_price: item[:bottle_price],
+    position: item[:position]
+  )
 end
 
 # ============================================
@@ -204,14 +212,192 @@ end
 # ============================================
 puts "Creating formulas..."
 
+Formula.destroy_all
+
 [
-  { name: "Formule Déjeuner", description: "Plat + Dessert", price: 22, position: 1 },
-  { name: "Menu Complet", description: "Entrée + Plat + Dessert", price: 32, position: 2 }
+  { name: "Entrée/Plat ou Plat/Dessert", description: nil, price: 22, position: 0 },
+  { name: "Entrée + Plat + Dessert", description: nil, price: 24, position: 1 }
 ].each do |item|
-  Formula.find_or_create_by!(name: item[:name]) do |f|
-    f.description = item[:description]
-    f.price = item[:price]
-    f.position = item[:position]
+  Formula.create!(
+    name: item[:name],
+    description: item[:description],
+    price: item[:price],
+    position: item[:position]
+  )
+end
+
+# ============================================
+# BEVERAGES
+# ============================================
+puts "Creating beverages..."
+
+Beverage.destroy_all
+
+# LES BOISSONS CHAUDES
+[
+  { name: "Café", price: 2, position: 0 },
+  { name: "Décaféiné", price: 2, position: 1 },
+  { name: "Café allongé", price: 2, position: 2 },
+  { name: "Déca Allongé", price: 2, position: 3 },
+  { name: "Double expresso", price: 3.80, position: 4 },
+  { name: "Thé", price: 4.50, position: 5 },
+  { name: "Café serré", price: 2, position: 6 },
+  { name: "Noisette", price: 2.20, position: 7 },
+  { name: "Chocolat chaud", price: 4.50, position: 8 },
+  { name: "Grand crème", price: 4, position: 9 },
+  { name: "Cappuccino", price: 4, position: 10 },
+  { name: "Café Latté", price: 5, position: 11 },
+  { name: "Chocolat Chamalow", price: 5, position: 12 },
+  { name: "Irish Coffee", price: 10, position: 13 },
+  { name: "Chocolat Baileys", price: 10, position: 14 }
+].each do |item|
+  Beverage.create!(
+    name: item[:name],
+    category: "boisson_chaude",
+    price: item[:price],
+    position: item[:position],
+    active: true
+  )
+end
+
+# LES SOFTS
+[
+  { name: "33cl Schweppes, Coca Cola, Perrier", price: 4, position: 0 },
+  { name: "25cl Fuzetea, Jus de fruit, Limonade, Orangina", price: 4, position: 1 },
+  { name: "33cl Chose", price: 4, position: 2 },
+  { name: "50cl Chose", price: 7.50, position: 3 },
+  { name: "Bouteille plate et pétillante 50cl", price: 3.60, position: 4 },
+  { name: "Bouteille plate et pétillante 1L", price: 4.60, position: 5 }
+].each do |item|
+  Beverage.create!(
+    name: item[:name],
+    category: "soft",
+    price: item[:price],
+    position: item[:position],
+    active: true
+  )
+end
+
+# LES BIÈRES (price_small = 25cl, price_medium = 33cl, price_large = 50cl)
+[
+  { name: "Loburg", price_small: 3.80, price_medium: 4.50, price_large: 6.50, position: 0 },
+  { name: "Leffe", price_small: 4.60, price_medium: 5.60, price_large: 8, position: 1 },
+  { name: "Hoegaarden", price_small: 4.60, price_medium: 5.60, price_large: 8.30, position: 2 },
+  { name: "Panaché", price_small: 4, price_medium: 5, price_large: 7, position: 3 },
+  { name: "Picon Bière", price_small: 4.80, price_medium: 5.80, price_large: 8.50, position: 4 }
+].each do |item|
+  Beverage.create!(
+    name: item[:name],
+    category: "biere",
+    price_small: item[:price_small],
+    price_medium: item[:price_medium],
+    price_large: item[:price_large],
+    position: item[:position],
+    active: true
+  )
+end
+
+# LES APÉRITIFS
+[
+  { name: "Ricard/Pastis 4cl", price: 4, position: 0 },
+  { name: "Martini 6cl", price: 6, position: 1 },
+  { name: "Kir, Coupe de Prosecco 12.5cl", price: 7, position: 2 },
+  { name: "Lillet, Campari 6cl", price: 7, position: 3 },
+  { name: "Kir Royal au Prosecco 12.5cl", price: 9, position: 4 },
+  { name: "Americano 8cl", price: 9, position: 5 }
+].each do |item|
+  Beverage.create!(
+    name: item[:name],
+    category: "aperitif",
+    price: item[:price],
+    position: item[:position],
+    active: true
+  )
+end
+
+# LES COCKTAILS
+[
+  { name: "Caipirinha", description: "Cachaça, citron vert, cassonade", price: 10, position: 0 },
+  { name: "Aperol Spritz", description: "Aperol, Prosecco, eau gazeuse", price: 10, position: 1 },
+  { name: "St Germain Spritz", description: "St Germain, Prosecco, eau gazeuse", price: 12, position: 2 },
+  { name: "Pina Colada", description: "Rhum, jus d'ananas, coco", price: 10, position: 3 },
+  { name: "Kraken Dark'n'Stormy", description: "Rhum, ginger beer, citron vert, cassonade", price: 10, position: 4 },
+  { name: "Moscow Mule", description: "Vodka, ginger beer, citron vert, cassonade", price: 10, position: 5 },
+  { name: "Tchanqué Gin", description: "Choisissez votre gin et soft !", price: 12, position: 6 },
+  { name: "Mojito", description: "Rhum, eau gazeuse, citron vert, cassonade, menthe", price: 10, position: 7 }
+].each do |item|
+  Beverage.create!(
+    name: item[:name],
+    category: "cocktail",
+    description: item[:description],
+    price: item[:price],
+    position: item[:position],
+    active: true
+  )
+end
+
+# LES MOCKTAILS
+[
+  { name: "Virgin Mojito", price: 7, position: 0 },
+  { name: "Virgin Pina", price: 7, position: 1 },
+  { name: "Virgin Tchanqué", price: 7, position: 2 }
+].each do |item|
+  Beverage.create!(
+    name: item[:name],
+    category: "mocktail",
+    price: item[:price],
+    position: item[:position],
+    active: true
+  )
+end
+
+# LES ALCOOLS
+[
+  { name: "Manzana, Whisky, Vodka, Gin", price: 6, position: 0 },
+  { name: "Get, Menthe Pastille", price: 7, position: 1 },
+  { name: "Rhum Vieux, Cognac, Armagnac", price: 9, position: 2 },
+  { name: "Jack Daniel's, Single Malt", price: 10, position: 3 }
+].each do |item|
+  Beverage.create!(
+    name: item[:name],
+    category: "alcool",
+    price: item[:price],
+    position: item[:position],
+    active: true
+  )
+end
+
+# ============================================
+# EVENTS
+# ============================================
+puts "Creating events..."
+
+# Use current year for events
+current_year = Date.current.year
+
+[
+  {
+    title: "Soirée Saint-Valentin",
+    description: "Menu spécial en amoureux avec vue sur le lac",
+    start_date: Date.new(current_year, 2, 14),
+    active: true
+  },
+  {
+    title: "Brunch de Pâques",
+    description: "Brunch gourmand en famille",
+    start_date: Date.new(current_year, 4, 20),
+    active: true
+  },
+  {
+    title: "Fermeture exceptionnelle",
+    description: "Le restaurant sera fermé pour le 1er mai",
+    start_date: Date.new(current_year, 5, 1),
+    active: true
+  }
+].each do |event_data|
+  Event.find_or_create_by!(title: event_data[:title], start_date: event_data[:start_date]) do |event|
+    event.description = event_data[:description]
+    event.active = event_data[:active]
   end
 end
 
@@ -221,7 +407,9 @@ puts "Summary:"
 puts "  - PageContents: #{PageContent.count}"
 puts "  - MenuItems: #{MenuItem.count}"
 puts "  - WineItems: #{WineItem.count}"
+puts "  - Beverages: #{Beverage.count}"
 puts "  - Formulas: #{Formula.count}"
+puts "  - Events: #{Event.count}"
 puts ""
 puts "Admin access:"
 puts "  URL: /admin"

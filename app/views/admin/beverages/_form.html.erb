@@ -1,0 +1,75 @@
+<%= form_with model: [:admin, @beverage], class: "space-y-6" do |f| %>
+  <% if @beverage.errors.any? %>
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+      <ul>
+        <% @beverage.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div>
+      <%= f.label :category, "Catégorie", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.select :category, Beverage.category_options, {}, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500" %>
+    </div>
+
+    <div>
+      <%= f.label :position, "Position", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.number_field :position, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", min: 0 %>
+      <p class="text-xs text-gray-500 mt-1">Ordre d'affichage dans la catégorie (0 = premier)</p>
+    </div>
+  </div>
+
+  <div>
+    <%= f.label :name, "Nom de la boisson", class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.text_field :name, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", placeholder: "Ex: Mojito" %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Description / Ingrédients (optionnel)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.text_area :description, rows: 2, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", placeholder: "Ex: Rhum, citron vert, menthe, sucre de canne" %>
+  </div>
+
+  <div class="bg-gray-50 rounded-lg p-4">
+    <p class="font-medium text-gray-700 mb-4">Prix</p>
+
+    <div class="grid md:grid-cols-4 gap-4">
+      <div>
+        <%= f.label :price, "Prix unique", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :price, step: 0.01, min: 0, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", placeholder: "10.00" %>
+        <p class="text-xs text-gray-500 mt-1">Pour les boissons sans tailles</p>
+      </div>
+
+      <div>
+        <%= f.label :price_small, "Petit (25cl)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :price_small, step: 0.01, min: 0, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", placeholder: "4.00" %>
+      </div>
+
+      <div>
+        <%= f.label :price_medium, "Moyen (33cl)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :price_medium, step: 0.01, min: 0, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", placeholder: "5.00" %>
+      </div>
+
+      <div>
+        <%= f.label :price_large, "Grand (50cl)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.number_field :price_large, step: 0.01, min: 0, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", placeholder: "7.00" %>
+      </div>
+    </div>
+
+    <p class="text-xs text-gray-500 mt-3">
+      <strong>Astuce :</strong> Utilisez "Prix unique" pour les cocktails, apéritifs, etc. Utilisez les 3 tailles pour les bières.
+    </p>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <%= f.check_box :active, class: "w-4 h-4 text-forest-600 border-gray-300 rounded focus:ring-forest-500" %>
+    <%= f.label :active, "Boisson active (visible sur le site)", class: "text-sm font-medium text-gray-700" %>
+  </div>
+
+  <div class="flex gap-4 pt-4">
+    <%= f.submit "Enregistrer", class: "bg-forest-600 text-white px-6 py-2 rounded hover:bg-forest-700 transition-colors cursor-pointer" %>
+    <%= link_to "Annuler", admin_beverages_path, class: "bg-gray-300 text-gray-700 px-6 py-2 rounded hover:bg-gray-400 transition-colors" %>
+  </div>
+<% end %>

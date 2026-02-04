@@ -1,14 +1,14 @@
 <h1 class="text-3xl font-bold text-forest-800 mb-8">Dashboard Administration</h1>
 
 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-  <!-- Carrousel -->
-  <div class="bg-white rounded-lg shadow p-6">
+  <!-- Photos du site -->
+  <div class="bg-white rounded-lg shadow p-6 border-2 border-gold-400">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-xl font-semibold text-forest-800">Images Carrousel</h2>
-      <span class="bg-forest-100 text-forest-800 px-3 py-1 rounded-full text-sm font-medium"><%= @carousel_images_count %></span>
+      <h2 class="text-xl font-semibold text-forest-800">Photos du site</h2>
+      <span class="bg-forest-100 text-forest-800 px-3 py-1 rounded-full text-sm font-medium"><%= @site_photos_count %></span>
     </div>
-    <p class="text-gray-600 mb-4">Gérez les images des carrousels de chaque page.</p>
-    <%= link_to "Gérer", admin_carousel_images_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
+    <p class="text-gray-600 mb-4">Gérez toutes les images affichées sur le site.</p>
+    <%= link_to "Gérer", admin_site_photos_path, class: "inline-block bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors" %>
   </div>
 
   <!-- Carte -->
@@ -31,6 +31,16 @@
     <%= link_to "Gérer", admin_wine_items_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
   </div>
 
+  <!-- Boissons -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-forest-800">Carte des Boissons</h2>
+      <span class="bg-forest-100 text-forest-800 px-3 py-1 rounded-full text-sm font-medium"><%= @beverages_count %></span>
+    </div>
+    <p class="text-gray-600 mb-4">Gérez les cocktails, bières et apéritifs.</p>
+    <%= link_to "Gérer", admin_beverages_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
+  </div>
+
   <!-- Formules -->
   <div class="bg-white rounded-lg shadow p-6">
     <div class="flex items-center justify-between mb-4">
@@ -39,6 +49,19 @@
     </div>
     <p class="text-gray-600 mb-4">Gérez les formules du restaurant.</p>
     <%= link_to "Gérer", admin_formulas_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
+  </div>
+
+  <!-- Événements -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-forest-800">Événements</h2>
+      <div class="flex items-center gap-2">
+        <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium"><%= @active_events_count %> actifs</span>
+        <span class="bg-forest-100 text-forest-800 px-3 py-1 rounded-full text-sm font-medium"><%= @events_count %></span>
+      </div>
+    </div>
+    <p class="text-gray-600 mb-4">Gérez le fil d'actualités et événements.</p>
+    <%= link_to "Gérer", admin_events_path, class: "inline-block bg-forest-600 text-white px-4 py-2 rounded hover:bg-forest-700 transition-colors" %>
   </div>
 
   <!-- Contenus -->

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get "/la-carte", to: "pages#carte", as: :carte
   get "/la-carte-des-vins", to: "pages#vins", as: :vins
+  get "/la-carte-des-boissons", to: "pages#boissons", as: :boissons
   get "/nos-evenements", to: "pages#evenements", as: :evenements
 
   # SEO
@@ -22,10 +23,13 @@ Rails.application.routes.draw do
   # Admin
   namespace :admin do
     root "dashboard#index"
+    resources :site_photos, except: [:show]
     resources :carousel_images, except: [:show]
     resources :menu_items, except: [:show]
     resources :wine_items, except: [:show]
+    resources :beverages, except: [:show]
     resources :formulas, except: [:show]
     resources :page_contents, only: [:index, :edit, :update]
+    resources :events, except: [:show]
   end
 end

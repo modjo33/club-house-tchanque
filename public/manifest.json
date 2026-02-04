@@ -1,0 +1,16 @@
+{
+  "name": "Club House Tchanqué",
+  "short_name": "Tchanqué",
+  "description": "Restaurant du Golf de Villenave-d'Ornon",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fefdfb",
+  "theme_color": "#1e3f1e",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

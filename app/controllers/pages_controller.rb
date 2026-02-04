@@ -17,6 +17,13 @@ class PagesController < ApplicationController
     @page_keywords = "carte des vins, vins, bordeaux, pessac-léognan, côtes du rhône, champagne, vin rouge, vin blanc, rosé, restaurant"
   end
 
+  def boissons
+    @page_title = "La carte des boissons - Club House Tchanqué"
+    @page_description = "Découvrez notre carte des boissons : cocktails, bières, apéritifs, softs et mocktails au Club House Tchanqué."
+    @page_keywords = "carte des boissons, cocktails, bières, apéritifs, mojito, spritz, villenave d'ornon, restaurant"
+    @beverages = Beverage.grouped_by_category
+  end
+
   def evenements
     @page_title = "Salle de réunion et événements - Club House Tchanqué"
     @page_description = "Organisez vos réunions, séminaires et événements privés au Club House Tchanqué. Salle Birdie de 40m2 avec vue sur le golf, vidéo-projecteur et wifi. Jusqu'à 30 personnes."

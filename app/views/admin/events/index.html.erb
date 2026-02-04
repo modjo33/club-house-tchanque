@@ -1,0 +1,75 @@
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-3xl font-bold text-forest-800">Événements / Actualités</h1>
+  <%= link_to "Ajouter un événement", new_admin_event_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors" %>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="w-full">
+    <thead class="bg-forest-800 text-white">
+      <tr>
+        <th class="px-4 py-3 text-left">Titre</th>
+        <th class="px-4 py-3 text-center">Affiche</th>
+        <th class="px-4 py-3 text-left">Date</th>
+        <th class="px-4 py-3 text-center">Actif</th>
+        <th class="px-4 py-3 text-center">Statut</th>
+        <th class="px-4 py-3 text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <% @events.each do |event| %>
+        <tr class="hover:bg-gray-50 <%= 'opacity-50' unless event.active %>">
+          <td class="px-4 py-3">
+            <p class="font-medium"><%= event.title %></p>
+            <% if event.description.present? %>
+              <p class="text-sm text-gray-500"><%= truncate(event.description, length: 50) %></p>
+            <% end %>
+          </td>
+          <td class="px-4 py-3 text-center">
+            <% if event.affiche.attached? %>
+              <%= image_tag event.affiche, class: "h-12 w-auto rounded shadow mx-auto" %>
+            <% else %>
+              <span class="text-xs text-gray-400">Aucune</span>
+            <% end %>
+          </td>
+          <td class="px-4 py-3 text-sm">
+            <%= event.formatted_date %>
+          </td>
+          <td class="px-4 py-3 text-center">
+            <% if event.active %>
+              <span class="inline-block w-3 h-3 bg-green-500 rounded-full" title="Actif"></span>
+            <% else %>
+              <span class="inline-block w-3 h-3 bg-gray-300 rounded-full" title="Inactif"></span>
+            <% end %>
+          </td>
+          <td class="px-4 py-3 text-center">
+            <% if event.start_date < Date.current && (event.end_date.nil? || event.end_date < Date.current) %>
+              <span class="text-xs px-2 py-1 bg-gray-200 text-gray-600 rounded">Passé</span>
+            <% elsif event.start_date <= Date.current %>
+              <span class="text-xs px-2 py-1 bg-green-200 text-green-700 rounded">En cours</span>
+            <% else %>
+              <span class="text-xs px-2 py-1 bg-blue-200 text-blue-700 rounded">À venir</span>
+            <% end %>
+          </td>
+          <td class="px-4 py-3 text-right">
+            <%= link_to "Modifier", edit_admin_event_path(event), class: "text-forest-600 hover:text-forest-800 mr-3" %>
+            <%= link_to "Supprimer", admin_event_path(event), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cet événement ?" }, class: "text-red-600 hover:text-red-800" %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @events.empty? %>
+        <tr>
+          <td colspan="6" class="px-4 py-8 text-center text-gray-500">Aucun événement pour le moment.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-6 p-4 bg-blue-50 rounded-lg space-y-2">
+  <p class="text-sm text-blue-700">
+    <strong>Note :</strong> Les événements actifs dont la date n'est pas passée s'affichent automatiquement dans le bandeau d'actualités sur toutes les pages du site.
+  </p>
+  <p class="text-sm text-blue-700">
+    <strong>Affiche :</strong> Si un événement a une affiche, les visiteurs peuvent cliquer dessus pour voir l'image en grand dans une popup.
+  </p>
+</div>

@@ -1,0 +1,57 @@
+<%#
+  Carrousel dynamique
+  Usage: <%= render "shared/carousel", images: carousel_images_for("home", "evenements", fallback), options: { ... } %>
+
+  Options:
+    - height: classe Tailwind pour la hauteur (default: "h-64 md:h-80")
+    - autoplay: true/false (default: true)
+    - show_arrows: true/false (default: true)
+    - show_indicators: true/false (default: true)
+    - rounded: classe Tailwind pour les coins (default: "rounded-2xl")
+%>
+<% options ||= {} %>
+<% height = options[:height] || "h-64 md:h-80" %>
+<% autoplay = options.fetch(:autoplay, true) %>
+<% show_arrows = options.fetch(:show_arrows, true) %>
+<% show_indicators = options.fetch(:show_indicators, true) %>
+<% rounded = options[:rounded] || "rounded-2xl" %>
+
+<% if images.any? %>
+  <div data-controller="carousel" data-carousel-autoplay-value="<%= autoplay %>">
+    <div class="relative <%= rounded %> overflow-hidden shadow-xl">
+      <div class="relative <%= height %>">
+        <% images.each_with_index do |img, index| %>
+          <div class="carousel-slide absolute inset-0 transition-opacity duration-700 <%= index == 0 ? '' : 'opacity-0' %>" data-carousel-target="slide">
+            <img src="<%= img[:url] %>" alt="<%= img[:alt] %>" class="w-full h-full object-cover">
+          </div>
+        <% end %>
+      </div>
+
+      <% if show_arrows && images.size > 1 %>
+        <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white text-forest-800 shadow-lg transition-colors" data-action="click->carousel#prev" aria-label="Précédent">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white text-forest-800 shadow-lg transition-colors" data-action="click->carousel#next" aria-label="Suivant">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      <% end %>
+    </div>
+
+    <% if show_indicators && images.size > 1 %>
+      <div class="flex justify-center gap-2 mt-4">
+        <% images.each_with_index do |_, index| %>
+          <button type="button"
+                  class="w-2.5 h-2.5 rounded-full transition-all <%= index == 0 ? 'bg-forest-600' : 'bg-forest-300 hover:bg-forest-400' %>"
+                  data-carousel-target="indicator"
+                  data-action="click->carousel#goToSlide"
+                  data-index="<%= index %>">
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
