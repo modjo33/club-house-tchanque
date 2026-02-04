@@ -36,11 +36,13 @@ module ApplicationHelper
       "@context": "https://schema.org",
       "@type": "Restaurant",
       "name": "Club House Tchanqué",
-      "alternateName": "Restaurant du Golf",
-      "description": "Restaurant du golf de Villenave d'Ornon. Cuisine française traditionnelle, terrasse avec vue panoramique sur le golf et son lac.",
+      "alternateName": "Restaurant du Golf de Villenave-d'Ornon",
+      "description": "Restaurant ouvert à tous au cœur du golf de Villenave d'Ornon. Cuisine maison, produits frais, grande terrasse avec vue panoramique sur le lac.",
       "url": "https://club-house-tchanque.com",
       "telephone": "+33961631527",
       "email": "sasvmrestaurations@gmail.com",
+      "image": "https://club-house-tchanque.com/logo/logo-tchanque.jpg",
+      "logo": "https://club-house-tchanque.com/logo/logo-tchanque.jpg",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "43 Avenue Mirieu de Labarre",
@@ -62,7 +64,7 @@ module ApplicationHelper
           "closes": "19:00"
         }
       ],
-      "servesCuisine": "French",
+      "servesCuisine": "Française",
       "priceRange": "€€",
       "acceptsReservations": "True",
       "paymentAccepted": "Cash, Credit Card",
@@ -72,10 +74,23 @@ module ApplicationHelper
         "https://www.instagram.com/clubhousetchanque/",
         "https://www.tripadvisor.fr/Restaurant_Review-g1025628-d13456505-Reviews-Club_House_Tchanque-Villenave_D_ornon_Bordeaux_Gironde_Nouvelle_Aquitaine.html"
       ],
-      "hasMenu": {
-        "@type": "Menu",
-        "url": "https://club-house-tchanque.com/la-carte"
-      },
+      "hasMenu": [
+        {
+          "@type": "Menu",
+          "name": "La Carte",
+          "url": "https://club-house-tchanque.com/la-carte"
+        },
+        {
+          "@type": "Menu",
+          "name": "Carte des Vins",
+          "url": "https://club-house-tchanque.com/la-carte-des-vins"
+        },
+        {
+          "@type": "Menu",
+          "name": "Carte des Boissons",
+          "url": "https://club-house-tchanque.com/la-carte-des-boissons"
+        }
+      ],
       "amenityFeature": [
         {
           "@type": "LocationFeatureSpecification",
@@ -84,7 +99,7 @@ module ApplicationHelper
         },
         {
           "@type": "LocationFeatureSpecification",
-          "name": "Parking",
+          "name": "Parking gratuit",
           "value": true
         },
         {
@@ -94,7 +109,12 @@ module ApplicationHelper
         },
         {
           "@type": "LocationFeatureSpecification",
-          "name": "Wifi",
+          "name": "Wifi gratuit",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Vue sur le golf",
           "value": true
         }
       ]

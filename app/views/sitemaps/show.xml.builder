@@ -3,7 +3,7 @@ xml.urlset xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9" do
   @pages.each do |page|
     xml.url do
       xml.loc page[:url]
-      xml.lastmod Date.today.to_s
+      xml.lastmod page[:lastmod].strftime("%Y-%m-%d")
       xml.changefreq page[:changefreq]
       xml.priority page[:priority]
     end

@@ -1,4 +1,5 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# https://www.robotstxt.org/robotstxt.html
+# Club House Tchanqué - Restaurant du Golf de Villenave-d'Ornon
 
 User-agent: *
 Allow: /
@@ -7,5 +8,6 @@ Allow: /
 Sitemap: https://club-house-tchanque.com/sitemap.xml
 
 # Disallow admin and system paths
+Disallow: /admin/
 Disallow: /rails/
 Disallow: /up

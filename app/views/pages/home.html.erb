@@ -54,7 +54,7 @@
         <% lieu_img = site_photo_for("home_lieu") %>
         <div class="order-2 md:order-1" data-controller="scroll-animation" data-scroll-animation-animation-value="fade-in-left">
           <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-            <img src="<%= lieu_img[:url] %>" alt="<%= lieu_img[:alt] %>" class="w-full h-full object-cover">
+            <img src="<%= lieu_img[:url] %>" alt="<%= lieu_img[:alt] %>" class="w-full h-full object-cover" loading="lazy">
           </div>
         </div>
 
@@ -108,7 +108,7 @@
         <% cuisine_img = site_photo_for("home_cuisine") %>
         <div data-controller="scroll-animation" data-scroll-animation-animation-value="fade-in-right">
           <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-            <img src="<%= cuisine_img[:url] %>" alt="<%= cuisine_img[:alt] %>" class="w-full h-full object-cover">
+            <img src="<%= cuisine_img[:url] %>" alt="<%= cuisine_img[:alt] %>" class="w-full h-full object-cover" loading="lazy">
           </div>
         </div>
       </div>
@@ -137,7 +137,7 @@
       <div class="grid md:grid-cols-3 gap-6" data-controller="scroll-animation" data-scroll-animation-animation-value="fade-in">
         <% terrasse_images.first(3).each do |img| %>
           <div class="aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-            <img src="<%= img[:url] %>" alt="<%= img[:alt] %>" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <img src="<%= img[:url] %>" alt="<%= img[:alt] %>" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
           </div>
         <% end %>
       </div>

@@ -22,7 +22,7 @@
       <div class="relative <%= height %>">
         <% images.each_with_index do |img, index| %>
           <div class="carousel-slide absolute inset-0 transition-opacity duration-700 <%= index == 0 ? '' : 'opacity-0' %>" data-carousel-target="slide">
-            <img src="<%= img[:url] %>" alt="<%= img[:alt] %>" class="w-full h-full object-cover">
+            <img src="<%= img[:url] %>" alt="<%= img[:alt] %>" class="w-full h-full object-cover" loading="<%= index == 0 ? 'eager' : 'lazy' %>">
           </div>
         <% end %>
       </div>
