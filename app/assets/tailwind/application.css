@@ -274,10 +274,10 @@
   animation: marquee 30s linear infinite;
 }
 
-/* 2x faster on mobile for better readability */
+/* 3x faster on mobile for better readability */
 @media (max-width: 767px) {
   .animate-marquee {
-    animation: marquee 15s linear infinite;
+    animation: marquee 5s linear infinite;
   }
 }
 
