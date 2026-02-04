@@ -274,6 +274,13 @@
   animation: marquee 30s linear infinite;
 }
 
+/* 2x faster on mobile for better readability */
+@media (max-width: 767px) {
+  .animate-marquee {
+    animation: marquee 15s linear infinite;
+  }
+}
+
 .animate-marquee:hover {
   animation-play-state: paused;
 }
