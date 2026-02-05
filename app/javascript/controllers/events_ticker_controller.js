@@ -1,65 +1,86 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["slider", "slide", "indicator"]
+  static targets = ["container", "marquee"]
   static values = {
-    interval: { type: Number, default: 4000 }
+    speed: { type: Number, default: 50 } // pixels per second
   }
 
   connect() {
-    this.currentIndex = 0
-    if (this.slideTargets.length > 1) {
-      this.startAutoPlay()
-    }
+    if (!this.hasMarqueeTarget) return
+
+    this.position = 0
+    this.isPaused = false
+    this.lastTimestamp = null
+
+    // Wait for content to render
+    requestAnimationFrame(() => {
+      this.setupMarquee()
+    })
   }
 
   disconnect() {
-    this.stopAutoPlay()
-  }
-
-  startAutoPlay() {
-    this.intervalId = setInterval(() => {
-      this.next()
-    }, this.intervalValue)
-  }
-
-  stopAutoPlay() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId)
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId)
     }
   }
 
-  next() {
-    this.goTo((this.currentIndex + 1) % this.slideTargets.length)
-  }
+  setupMarquee() {
+    const marquee = this.marqueeTarget
 
-  goToSlide(event) {
-    const index = parseInt(event.currentTarget.dataset.index)
-    this.stopAutoPlay()
-    this.goTo(index)
-    this.startAutoPlay()
-  }
+    // Remove CSS animation class (we'll use JS instead)
+    marquee.classList.remove("animate-marquee")
+    marquee.style.animation = "none"
 
-  goTo(index) {
-    if (this.slideTargets.length === 0) return
+    // Get the width of the first half of content (original events)
+    const children = Array.from(marquee.children)
+    const halfLength = children.length / 2
 
-    this.currentIndex = index
-
-    // Move the slider
-    if (this.hasSliderTarget) {
-      const offset = -index * 100
-      this.sliderTarget.style.transform = `translateX(${offset}%)`
+    let firstHalfWidth = 0
+    for (let i = 0; i < halfLength; i++) {
+      firstHalfWidth += children[i].offsetWidth
     }
 
-    // Update indicators
-    this.indicatorTargets.forEach((indicator, i) => {
-      if (i === index) {
-        indicator.classList.remove("bg-sage-300")
-        indicator.classList.add("bg-forest-600")
-      } else {
-        indicator.classList.remove("bg-forest-600")
-        indicator.classList.add("bg-sage-300")
+    this.scrollWidth = firstHalfWidth
+
+    // Start the animation
+    this.startAnimation()
+
+    // Add hover pause functionality
+    this.containerTarget.addEventListener("mouseenter", () => this.pause())
+    this.containerTarget.addEventListener("mouseleave", () => this.resume())
+  }
+
+  startAnimation() {
+    this.lastTimestamp = performance.now()
+    this.animate()
+  }
+
+  animate(timestamp) {
+    if (!this.lastTimestamp) this.lastTimestamp = timestamp
+
+    if (!this.isPaused) {
+      const deltaTime = (timestamp - this.lastTimestamp) / 1000 // Convert to seconds
+      this.position -= this.speedValue * deltaTime
+
+      // Reset position when we've scrolled through the first set of events
+      if (Math.abs(this.position) >= this.scrollWidth) {
+        this.position = 0
       }
-    })
+
+      this.marqueeTarget.style.transform = `translateX(${this.position}px)`
+    }
+
+    this.lastTimestamp = timestamp
+    this.animationId = requestAnimationFrame((t) => this.animate(t))
+  }
+
+  pause() {
+    this.isPaused = true
+  }
+
+  resume() {
+    this.isPaused = false
+    this.lastTimestamp = performance.now()
   }
 }

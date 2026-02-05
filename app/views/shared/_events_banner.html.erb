@@ -1,129 +1,73 @@
 <%# Bandeau d'actualités - Affiche les événements actifs %>
 <% events = defined?(Event) ? Event.current_events : [] rescue [] %>
 <% if events.any? %>
-  <div class="sticky top-20 z-40 bg-gradient-to-r from-forest-800 via-forest-700 to-forest-800 shadow-lg" data-controller="events-ticker event-modal">
+  <div class="sticky top-20 z-40 bg-gradient-to-r from-forest-800 via-forest-700 to-forest-800 shadow-lg" data-controller="events-ticker event-modal" data-events-ticker-speed-value="80">
     <%# Motif subtil en overlay %>
     <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\" fill-rule=\"evenodd\"%3E%3Ccircle cx=\"3\" cy=\"3\" r=\"1\"%3E%3C/circle%3E%3C/g%3E%3C/svg%3E');"></div>
 
     <div class="relative container mx-auto px-4">
-      <% if events.count == 1 %>
-        <%# Un seul événement : affichage fixe centré avec animation pulse %>
-        <div class="py-4 text-center">
-          <% event = events.first %>
-          <% days_until = (event.start_date - Date.current).to_i %>
-          <% is_soon = days_until >= 0 && days_until <= 7 %>
+      <%# Défilement marquee pour tous les événements (1 ou plusieurs) %>
+      <div class="py-4 overflow-hidden" data-events-ticker-target="container">
+        <div class="flex whitespace-nowrap" data-events-ticker-target="marquee">
+          <%# Double les événements pour un défilement continu %>
+          <% 2.times do %>
+            <% events.each do |event| %>
+              <% days_until = (event.start_date - Date.current).to_i %>
+              <% is_soon = days_until >= 0 && days_until <= 7 %>
 
-          <div class="inline-flex items-center gap-3 animate-pulse-subtle">
-            <% if event.affiche.attached? %>
-              <button type="button"
-                      class="group inline-flex items-center gap-3 text-white hover:text-gold-300 transition-all duration-300 cursor-pointer"
-                      data-action="click->event-modal#open"
-                      data-image-url="<%= url_for(event.affiche) %>">
-                <%# Icône calendrier %>
-                <span class="flex items-center justify-center w-8 h-8 bg-white/20 rounded-full group-hover:bg-gold-400/30 transition-colors">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                  </svg>
-                </span>
-                <%# Badge "À venir" %>
-                <% if is_soon %>
-                  <span class="bg-gold-500 text-forest-900 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">À venir</span>
-                <% end %>
-                <%# Date %>
-                <span class="text-lg font-semibold text-gold-300"><%= event.short_date %></span>
-                <%# Séparateur %>
-                <span class="text-white/40">•</span>
-                <%# Titre %>
-                <span class="text-lg font-semibold group-hover:underline underline-offset-4 decoration-gold-400"><%= event.title %></span>
-                <%# Indicateur cliquable %>
-                <span class="text-sm text-gold-400/80 group-hover:text-gold-300 transition-colors">(voir l'affiche)</span>
-              </button>
-            <% else %>
-              <span class="inline-flex items-center gap-3 text-white">
-                <%# Icône calendrier %>
-                <span class="flex items-center justify-center w-8 h-8 bg-white/20 rounded-full">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                  </svg>
-                </span>
-                <%# Badge "À venir" %>
-                <% if is_soon %>
-                  <span class="bg-gold-500 text-forest-900 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">À venir</span>
-                <% end %>
-                <%# Date %>
-                <span class="text-lg font-semibold text-gold-300"><%= event.short_date %></span>
-                <%# Séparateur %>
-                <span class="text-white/40">•</span>
-                <%# Titre %>
-                <span class="text-lg font-semibold"><%= event.title %></span>
-              </span>
-            <% end %>
-          </div>
-        </div>
-      <% else %>
-        <%# Plusieurs événements : défilement marquee %>
-        <div class="py-4 overflow-hidden" data-events-ticker-target="container">
-          <div class="flex animate-marquee hover:pause-animation" data-events-ticker-target="marquee">
-            <%# Double les événements pour un défilement continu %>
-            <% 2.times do %>
-              <% events.each do |event| %>
-                <% days_until = (event.start_date - Date.current).to_i %>
-                <% is_soon = days_until >= 0 && days_until <= 7 %>
-
-                <div class="flex-shrink-0 px-8">
-                  <% if event.affiche.attached? %>
-                    <button type="button"
-                            class="group inline-flex items-center gap-3 text-white hover:text-gold-300 transition-all duration-300 cursor-pointer"
-                            data-action="click->event-modal#open"
-                            data-image-url="<%= url_for(event.affiche) %>">
-                      <%# Icône calendrier %>
-                      <span class="flex items-center justify-center w-7 h-7 bg-white/20 rounded-full group-hover:bg-gold-400/30 transition-colors">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                      </span>
-                      <%# Badge "À venir" %>
-                      <% if is_soon %>
-                        <span class="bg-gold-500 text-forest-900 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">À venir</span>
-                      <% end %>
-                      <%# Date %>
-                      <span class="text-base md:text-lg font-semibold text-gold-300"><%= event.short_date %></span>
-                      <%# Séparateur %>
-                      <span class="text-white/40">•</span>
-                      <%# Titre %>
-                      <span class="text-base md:text-lg font-semibold group-hover:underline underline-offset-4 decoration-gold-400"><%= event.title %></span>
-                    </button>
-                  <% else %>
-                    <span class="inline-flex items-center gap-3 text-white">
-                      <%# Icône calendrier %>
-                      <span class="flex items-center justify-center w-7 h-7 bg-white/20 rounded-full">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                      </span>
-                      <%# Badge "À venir" %>
-                      <% if is_soon %>
-                        <span class="bg-gold-500 text-forest-900 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">À venir</span>
-                      <% end %>
-                      <%# Date %>
-                      <span class="text-base md:text-lg font-semibold text-gold-300"><%= event.short_date %></span>
-                      <%# Séparateur %>
-                      <span class="text-white/40">•</span>
-                      <%# Titre %>
-                      <span class="text-base md:text-lg font-semibold"><%= event.title %></span>
+              <div class="flex-shrink-0 px-8 inline-flex items-center">
+                <% if event.affiche.attached? %>
+                  <button type="button"
+                          class="group inline-flex items-center gap-3 text-white hover:text-gold-300 transition-all duration-300 cursor-pointer"
+                          data-action="click->event-modal#open"
+                          data-image-url="<%= url_for(event.affiche) %>">
+                    <%# Icône calendrier %>
+                    <span class="flex items-center justify-center w-7 h-7 bg-white/20 rounded-full group-hover:bg-gold-400/30 transition-colors">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
                     </span>
-                  <% end %>
-                </div>
+                    <%# Badge "À venir" %>
+                    <% if is_soon %>
+                      <span class="bg-gold-500 text-forest-900 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">À venir</span>
+                    <% end %>
+                    <%# Date %>
+                    <span class="text-base md:text-lg font-semibold text-gold-300"><%= event.short_date %></span>
+                    <%# Séparateur %>
+                    <span class="text-white/40 mx-2">•</span>
+                    <%# Titre %>
+                    <span class="text-base md:text-lg font-semibold group-hover:underline underline-offset-4 decoration-gold-400"><%= event.title %></span>
+                  </button>
+                <% else %>
+                  <span class="inline-flex items-center gap-3 text-white">
+                    <%# Icône calendrier %>
+                    <span class="flex items-center justify-center w-7 h-7 bg-white/20 rounded-full">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
+                    </span>
+                    <%# Badge "À venir" %>
+                    <% if is_soon %>
+                      <span class="bg-gold-500 text-forest-900 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">À venir</span>
+                    <% end %>
+                    <%# Date %>
+                    <span class="text-base md:text-lg font-semibold text-gold-300"><%= event.short_date %></span>
+                    <%# Séparateur %>
+                    <span class="text-white/40 mx-2">•</span>
+                    <%# Titre %>
+                    <span class="text-base md:text-lg font-semibold"><%= event.title %></span>
+                  </span>
+                <% end %>
+              </div>
 
-                <%# Séparateur visuel entre événements %>
-                <div class="flex-shrink-0 flex items-center px-4">
-                  <span class="w-1.5 h-1.5 bg-gold-400/60 rounded-full"></span>
-                </div>
-              <% end %>
+              <%# Séparateur visuel entre événements %>
+              <div class="flex-shrink-0 flex items-center px-6">
+                <span class="w-2 h-2 bg-gold-400 rounded-full"></span>
+              </div>
             <% end %>
-          </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
 
     <%# Modal pour afficher l'affiche %>
