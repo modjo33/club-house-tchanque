@@ -13,9 +13,11 @@ export default class extends Controller {
     this.isPaused = false
     this.lastTimestamp = null
 
-    // Wait for content to render
+    // Double rAF to ensure layout is complete before measuring
     requestAnimationFrame(() => {
-      this.setupMarquee()
+      requestAnimationFrame(() => {
+        this.setupMarquee()
+      })
     })
   }
 
@@ -28,9 +30,15 @@ export default class extends Controller {
   setupMarquee() {
     const marquee = this.marqueeTarget
 
-    // Remove CSS animation class (we'll use JS instead)
+    // Remove CSS animation class (we use JS instead)
     marquee.classList.remove("animate-marquee")
     marquee.style.animation = "none"
+    marquee.style.webkitAnimation = "none"
+
+    // Enable GPU compositing for smooth mobile animation
+    marquee.style.willChange = "transform"
+    marquee.style.webkitBackfaceVisibility = "hidden"
+    marquee.style.backfaceVisibility = "hidden"
 
     // Get the width of the first half of content (original events)
     const children = Array.from(marquee.children)
@@ -43,24 +51,32 @@ export default class extends Controller {
 
     this.scrollWidth = firstHalfWidth
 
-    // Start the animation
-    this.startAnimation()
+    // Retry if layout not ready yet (common on mobile)
+    if (this.scrollWidth <= 0) {
+      setTimeout(() => this.setupMarquee(), 100)
+      return
+    }
 
-    // Add hover pause functionality
+    // Start animation via rAF (never call animate() synchronously)
+    this.animationId = requestAnimationFrame((t) => this.animate(t))
+
+    // Pause on hover (desktop)
     this.containerTarget.addEventListener("mouseenter", () => this.pause())
     this.containerTarget.addEventListener("mouseleave", () => this.resume())
-  }
 
-  startAnimation() {
-    this.lastTimestamp = performance.now()
-    this.animate()
+    // Pause on touch (mobile)
+    this.containerTarget.addEventListener("touchstart", () => this.pause(), { passive: true })
+    this.containerTarget.addEventListener("touchend", () => this.resume(), { passive: true })
   }
 
   animate(timestamp) {
-    if (!this.lastTimestamp) this.lastTimestamp = timestamp
+    // Initialize lastTimestamp on first frame (deltaTime will be 0)
+    if (!this.lastTimestamp) {
+      this.lastTimestamp = timestamp
+    }
 
     if (!this.isPaused) {
-      const deltaTime = (timestamp - this.lastTimestamp) / 1000 // Convert to seconds
+      const deltaTime = (timestamp - this.lastTimestamp) / 1000
       this.position -= this.speedValue * deltaTime
 
       // Reset position when we've scrolled through the first set of events
@@ -68,7 +84,9 @@ export default class extends Controller {
         this.position = 0
       }
 
-      this.marqueeTarget.style.transform = `translateX(${this.position}px)`
+      const tx = `translateX(${this.position}px)`
+      this.marqueeTarget.style.transform = tx
+      this.marqueeTarget.style.webkitTransform = tx
     }
 
     this.lastTimestamp = timestamp
@@ -81,6 +99,7 @@ export default class extends Controller {
 
   resume() {
     this.isPaused = false
-    this.lastTimestamp = performance.now()
+    // Reset timestamp to avoid a jump after pause
+    this.lastTimestamp = null
   }
 }

@@ -243,11 +243,23 @@
 }
 
 /* Events Banner Animations */
-@keyframes marquee {
+@-webkit-keyframes marquee {
   0% {
+    -webkit-transform: translateX(0);
     transform: translateX(0);
   }
   100% {
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+}
+@keyframes marquee {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
   }
 }
@@ -271,17 +283,23 @@
 }
 
 .animate-marquee {
+  -webkit-animation: marquee 30s linear infinite;
   animation: marquee 30s linear infinite;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 /* 3x faster on mobile for better readability */
 @media (max-width: 767px) {
   .animate-marquee {
+    -webkit-animation: marquee 5s linear infinite;
     animation: marquee 5s linear infinite;
   }
 }
 
 .animate-marquee:hover {
+  -webkit-animation-play-state: paused;
   animation-play-state: paused;
 }
 
