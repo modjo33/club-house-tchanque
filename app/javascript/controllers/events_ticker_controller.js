@@ -1,40 +1,74 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Handles pause/resume of the CSS marquee animation on hover and touch.
-// The actual animation is done purely in CSS via the .animate-marquee class.
 export default class extends Controller {
   static targets = ["marquee"]
+  static values = {
+    speed: { type: Number, default: 80 }
+  }
 
   connect() {
     if (!this.hasMarqueeTarget) return
 
-    // Pause on hover (desktop)
-    this.element.addEventListener("mouseenter", this.pause)
-    this.element.addEventListener("mouseleave", this.resume)
+    this.position = 0
+    this.paused = false
+    this.halfWidth = 0
+    this.rafId = null
 
-    // Pause on touch (mobile)
-    this.element.addEventListener("touchstart", this.pause, { passive: true })
-    this.element.addEventListener("touchend", this.resume, { passive: true })
+    // Measure after layout is fully ready
+    this.startTimer = setTimeout(() => {
+      this.measure()
+      this.lastTime = performance.now()
+      this.rafId = requestAnimationFrame(this.tick)
+    }, 100)
+
+    // Desktop: pause on hover
+    this.element.addEventListener("mouseenter", this.onPause)
+    this.element.addEventListener("mouseleave", this.onResume)
+    // Mobile: pause on touch
+    this.element.addEventListener("touchstart", this.onPause, { passive: true })
+    this.element.addEventListener("touchend", this.onResume, { passive: true })
   }
 
   disconnect() {
-    this.element.removeEventListener("mouseenter", this.pause)
-    this.element.removeEventListener("mouseleave", this.resume)
-    this.element.removeEventListener("touchstart", this.pause)
-    this.element.removeEventListener("touchend", this.resume)
+    if (this.rafId) cancelAnimationFrame(this.rafId)
+    if (this.startTimer) clearTimeout(this.startTimer)
+    this.element.removeEventListener("mouseenter", this.onPause)
+    this.element.removeEventListener("mouseleave", this.onResume)
+    this.element.removeEventListener("touchstart", this.onPause)
+    this.element.removeEventListener("touchend", this.onResume)
   }
 
-  pause = () => {
-    if (this.hasMarqueeTarget) {
-      this.marqueeTarget.style.animationPlayState = "paused"
-      this.marqueeTarget.style.webkitAnimationPlayState = "paused"
+  measure() {
+    const children = Array.from(this.marqueeTarget.children)
+    const half = Math.floor(children.length / 2)
+    this.halfWidth = 0
+    for (let i = 0; i < half; i++) {
+      this.halfWidth += children[i].offsetWidth
     }
   }
 
-  resume = () => {
-    if (this.hasMarqueeTarget) {
-      this.marqueeTarget.style.animationPlayState = "running"
-      this.marqueeTarget.style.webkitAnimationPlayState = "running"
+  tick = (now) => {
+    if (!this.paused && this.halfWidth > 0) {
+      const delta = (now - this.lastTime) / 1000
+      this.position -= this.speedValue * delta
+
+      if (Math.abs(this.position) >= this.halfWidth) {
+        this.position = 0
+      }
+
+      this.marqueeTarget.style.transform = "translateX(" + this.position + "px)"
     }
+
+    this.lastTime = now
+    this.rafId = requestAnimationFrame(this.tick)
+  }
+
+  onPause = () => {
+    this.paused = true
+  }
+
+  onResume = () => {
+    this.paused = false
+    this.lastTime = performance.now()
   }
 }

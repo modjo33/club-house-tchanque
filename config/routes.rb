@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   # Admin
   namespace :admin do
     root "dashboard#index"
+    delete "logout", to: "sessions#destroy", as: :logout
     resources :site_photos, except: [:show]
     resources :carousel_images, except: [:show]
     resources :menu_items, except: [:show]

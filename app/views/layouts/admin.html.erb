@@ -36,7 +36,10 @@
               <%= link_to "Contenus", admin_page_contents_path, class: "text-cream-200 hover:text-gold-400 transition-colors text-sm" %>
             </div>
           </div>
-          <%= link_to "Voir le site", root_path, class: "text-sm text-cream-200 hover:text-gold-400 transition-colors", target: "_blank" %>
+          <div class="flex items-center gap-4">
+            <%= link_to "Voir le site", root_path, class: "text-sm text-cream-200 hover:text-gold-400 transition-colors", target: "_blank" %>
+            <%= button_to "Déconnexion", admin_logout_path, method: :delete, class: "text-sm text-red-300 hover:text-red-100 transition-colors cursor-pointer" %>
+          </div>
         </div>
       </div>
     </nav>
