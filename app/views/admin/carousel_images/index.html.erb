@@ -1,6 +1,6 @@
-<div class="flex items-center justify-between mb-6">
-  <h1 class="text-3xl font-bold text-forest-800">Images des Carrousels</h1>
-  <%= link_to "Ajouter une image", new_admin_carousel_image_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors" %>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+  <h1 class="text-2xl sm:text-3xl font-bold text-forest-800">Images des Carrousels</h1>
+  <%= link_to "Ajouter une image", new_admin_carousel_image_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors self-start sm:self-auto" %>
 </div>
 
 <div class="mb-6 p-4 bg-blue-50 rounded-lg space-y-2">
@@ -23,7 +23,43 @@
   </p>
 </div>
 
-<div class="bg-white rounded-lg shadow overflow-hidden">
+<%# ===== MOBILE CARDS ===== %>
+<div class="md:hidden space-y-6">
+  <% @carousel_images.group_by { |i| [i.page, i.section] }.each do |(page, section), images| %>
+    <div>
+      <h3 class="text-sm font-semibold text-forest-700 bg-gray-100 px-3 py-2 rounded-t-lg">
+        <%= page.capitalize %> — <%= section.capitalize %>
+      </h3>
+      <div class="space-y-2">
+        <% images.each do |image| %>
+          <div class="bg-white rounded-lg shadow p-3 flex items-center gap-3">
+            <% if image.image.attached? %>
+              <%= image_tag image.image.variant(resize_to_limit: [100, 60]), class: "h-12 w-auto rounded shrink-0" %>
+            <% else %>
+              <div class="h-12 w-16 bg-gray-100 rounded flex items-center justify-center shrink-0">
+                <span class="text-gray-400 text-xs">N/A</span>
+              </div>
+            <% end %>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-forest-800 truncate"><%= image.alt_text.presence || "Sans description" %></p>
+              <p class="text-xs text-gray-500">Position: <%= image.position %></p>
+            </div>
+            <div class="flex gap-2 shrink-0">
+              <%= link_to "Modifier", edit_admin_carousel_image_path(image), class: "text-xs text-forest-600 hover:text-forest-800 font-medium" %>
+              <%= link_to "Suppr.", admin_carousel_image_path(image), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" }, class: "text-xs text-red-600 hover:text-red-800 font-medium" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% if @carousel_images.empty? %>
+    <div class="bg-white rounded-lg shadow p-8 text-center text-gray-500">Aucune image pour le moment.</div>
+  <% end %>
+</div>
+
+<%# ===== DESKTOP TABLE ===== %>
+<div class="hidden md:block bg-white rounded-lg shadow overflow-hidden">
   <table class="w-full">
     <thead class="bg-forest-800 text-white">
       <tr>

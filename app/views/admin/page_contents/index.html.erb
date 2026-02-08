@@ -1,6 +1,30 @@
-<h1 class="text-3xl font-bold text-forest-800 mb-6">Contenus des Pages</h1>
+<h1 class="text-2xl sm:text-3xl font-bold text-forest-800 mb-6">Contenus des Pages</h1>
 
-<div class="bg-white rounded-lg shadow overflow-hidden">
+<%# ===== MOBILE CARDS ===== %>
+<div class="md:hidden space-y-2">
+  <% @page_contents.each do |content| %>
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="flex items-start justify-between gap-2">
+        <div class="flex-1 min-w-0">
+          <span class="bg-forest-100 text-forest-800 px-2 py-0.5 rounded text-xs">
+            <%= PageContent.slug_options.find { |o| o[1] == content.slug }&.first || content.slug %>
+          </span>
+          <p class="font-medium text-forest-800 mt-1"><%= content.title %></p>
+          <p class="text-sm text-gray-500 mt-0.5"><%= truncate(content.body, length: 60) %></p>
+        </div>
+        <%= link_to "Modifier", edit_admin_page_content_path(content), class: "text-sm text-forest-600 hover:text-forest-800 font-medium shrink-0 self-center" %>
+      </div>
+    </div>
+  <% end %>
+  <% if @page_contents.empty? %>
+    <div class="bg-white rounded-lg shadow p-8 text-center text-gray-500">
+      Aucun contenu pour le moment. Exécutez <code>rails db:seed</code> pour charger les données initiales.
+    </div>
+  <% end %>
+</div>
+
+<%# ===== DESKTOP TABLE ===== %>
+<div class="hidden md:block bg-white rounded-lg shadow overflow-hidden">
   <table class="w-full">
     <thead class="bg-forest-800 text-white">
       <tr>

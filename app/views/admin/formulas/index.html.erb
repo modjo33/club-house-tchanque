@@ -1,9 +1,32 @@
-<div class="flex items-center justify-between mb-6">
-  <h1 class="text-3xl font-bold text-forest-800">Formules</h1>
-  <%= link_to "Ajouter une formule", new_admin_formula_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors" %>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+  <h1 class="text-2xl sm:text-3xl font-bold text-forest-800">Formules</h1>
+  <%= link_to "Ajouter une formule", new_admin_formula_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors self-start sm:self-auto" %>
 </div>
 
-<div class="bg-white rounded-lg shadow overflow-hidden">
+<%# ===== MOBILE CARDS ===== %>
+<div class="md:hidden space-y-2">
+  <% @formulas.each do |formula| %>
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="flex items-start justify-between gap-2">
+        <div class="flex-1 min-w-0">
+          <p class="font-medium text-forest-800"><%= formula.name %></p>
+          <p class="text-sm text-gray-500 mt-0.5"><%= truncate(formula.description, length: 60) %></p>
+        </div>
+        <span class="font-semibold text-gold-600 shrink-0"><%= formula.formatted_price %></span>
+      </div>
+      <div class="flex justify-end gap-3 mt-3 pt-2 border-t border-gray-100">
+        <%= link_to "Modifier", edit_admin_formula_path(formula), class: "text-sm text-forest-600 hover:text-forest-800 font-medium" %>
+        <%= link_to "Supprimer", admin_formula_path(formula), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" }, class: "text-sm text-red-600 hover:text-red-800 font-medium" %>
+      </div>
+    </div>
+  <% end %>
+  <% if @formulas.empty? %>
+    <div class="bg-white rounded-lg shadow p-8 text-center text-gray-500">Aucune formule pour le moment.</div>
+  <% end %>
+</div>
+
+<%# ===== DESKTOP TABLE ===== %>
+<div class="hidden md:block bg-white rounded-lg shadow overflow-hidden">
   <table class="w-full">
     <thead class="bg-forest-800 text-white">
       <tr>

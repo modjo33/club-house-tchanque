@@ -1,9 +1,55 @@
-<div class="flex items-center justify-between mb-6">
-  <h1 class="text-3xl font-bold text-forest-800">Événements / Actualités</h1>
-  <%= link_to "Ajouter un événement", new_admin_event_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors" %>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+  <h1 class="text-2xl sm:text-3xl font-bold text-forest-800">Événements / Actualités</h1>
+  <%= link_to "Ajouter un événement", new_admin_event_path, class: "bg-gold-500 text-white px-4 py-2 rounded hover:bg-gold-600 transition-colors self-start sm:self-auto" %>
 </div>
 
-<div class="bg-white rounded-lg shadow overflow-hidden">
+<%# ===== MOBILE CARDS ===== %>
+<div class="md:hidden space-y-3">
+  <% @events.each do |event| %>
+    <div class="bg-white rounded-lg shadow p-4 <%= 'opacity-50' unless event.active %>">
+      <div class="flex items-start gap-3">
+        <% if event.affiche.attached? %>
+          <div class="shrink-0">
+            <%= image_tag event.affiche.variant(resize_to_limit: [200, 150]), class: "w-16 h-16 object-cover rounded shadow" %>
+          </div>
+        <% end %>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <p class="font-medium text-forest-800 truncate"><%= event.title %></p>
+            <% if event.active %>
+              <span class="inline-block w-2.5 h-2.5 bg-green-500 rounded-full shrink-0" title="Actif"></span>
+            <% else %>
+              <span class="inline-block w-2.5 h-2.5 bg-gray-300 rounded-full shrink-0" title="Inactif"></span>
+            <% end %>
+          </div>
+          <% if event.description.present? %>
+            <p class="text-sm text-gray-500 truncate"><%= truncate(event.description, length: 50) %></p>
+          <% end %>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs text-gray-500"><%= event.formatted_date %></span>
+            <% if event.start_date < Date.current && (event.end_date.nil? || event.end_date < Date.current) %>
+              <span class="text-xs px-1.5 py-0.5 bg-gray-200 text-gray-600 rounded">Passé</span>
+            <% elsif event.start_date <= Date.current %>
+              <span class="text-xs px-1.5 py-0.5 bg-green-200 text-green-700 rounded">En cours</span>
+            <% else %>
+              <span class="text-xs px-1.5 py-0.5 bg-blue-200 text-blue-700 rounded">À venir</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-3 mt-3 pt-2 border-t border-gray-100">
+        <%= link_to "Modifier", edit_admin_event_path(event), class: "text-sm text-forest-600 hover:text-forest-800 font-medium" %>
+        <%= link_to "Supprimer", admin_event_path(event), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cet événement ?" }, class: "text-sm text-red-600 hover:text-red-800 font-medium" %>
+      </div>
+    </div>
+  <% end %>
+  <% if @events.empty? %>
+    <div class="bg-white rounded-lg shadow p-8 text-center text-gray-500">Aucun événement pour le moment.</div>
+  <% end %>
+</div>
+
+<%# ===== DESKTOP TABLE ===== %>
+<div class="hidden md:block bg-white rounded-lg shadow overflow-hidden">
   <table class="w-full">
     <thead class="bg-forest-800 text-white">
       <tr>
@@ -26,7 +72,7 @@
           </td>
           <td class="px-4 py-3 text-center">
             <% if event.affiche.attached? %>
-              <%= image_tag event.affiche, class: "h-12 w-auto rounded shadow mx-auto" %>
+              <%= image_tag event.affiche.variant(resize_to_limit: [200, 150]), class: "h-12 w-auto rounded shadow mx-auto" %>
             <% else %>
               <span class="text-xs text-gray-400">Aucune</span>
             <% end %>
