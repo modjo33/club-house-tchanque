@@ -283,18 +283,17 @@
 }
 
 .animate-marquee {
-  -webkit-animation: marquee 30s linear infinite;
-  animation: marquee 30s linear infinite;
+  -webkit-animation: marquee 20s linear infinite;
+  animation: marquee 20s linear infinite;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   will-change: transform;
 }
 
-/* 3x faster on mobile for better readability */
 @media (max-width: 767px) {
   .animate-marquee {
-    -webkit-animation: marquee 5s linear infinite;
-    animation: marquee 5s linear infinite;
+    -webkit-animation: marquee 10s linear infinite;
+    animation: marquee 10s linear infinite;
   }
 }
 
