@@ -66,7 +66,6 @@
             <%= link_to "Vins", vins_path, class: "nav-link #{current_page?(vins_path) ? 'nav-link-active' : ''}" %>
             <%= link_to "Boissons", boissons_path, class: "nav-link #{current_page?(boissons_path) ? 'nav-link-active' : ''}" %>
             <%= link_to "Événements", evenements_path, class: "nav-link #{current_page?(evenements_path) ? 'nav-link-active' : ''}" %>
-            <%= link_to "Admin", admin_root_path, class: "text-xs text-forest-500 hover:text-cream-200 transition-colors opacity-50 hover:opacity-100 ml-2" %>
           </div>
 
           <!-- Mobile Menu Button -->
@@ -88,9 +87,6 @@
             <%= link_to "Carte des vins", vins_path, class: "mobile-nav-link #{current_page?(vins_path) ? 'mobile-nav-link-active' : ''}" %>
             <%= link_to "Carte des boissons", boissons_path, class: "mobile-nav-link #{current_page?(boissons_path) ? 'mobile-nav-link-active' : ''}" %>
             <%= link_to "Nos événements", evenements_path, class: "mobile-nav-link #{current_page?(evenements_path) ? 'mobile-nav-link-active' : ''}" %>
-            <div class="border-t border-forest-700 pt-4 mt-2">
-              <%= link_to "Admin", admin_root_path, class: "text-xs text-forest-500 hover:text-cream-200 transition-colors" %>
-            </div>
           </div>
         </div>
       </div>
