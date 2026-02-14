@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180" width="400" height="180">
+  <defs>
+    <!-- Dégradé de fond vert -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3d5c4a"/>
+      <stop offset="50%" style="stop-color:#2d4a3e"/>
+      <stop offset="100%" style="stop-color:#1f3529"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Fond avec cadre arrondi -->
+  <rect x="5" y="5" width="390" height="170" rx="8" ry="8" fill="url(#bgGradient)"/>
+  
+  <!-- Cadre extérieur -->
+  <rect x="5" y="5" width="390" height="170" rx="8" ry="8" fill="none" stroke="#c9b896" stroke-width="2"/>
+  
+  <!-- Cadre intérieur décoratif -->
+  <rect x="15" y="15" width="370" height="150" rx="4" ry="4" fill="none" stroke="#c9b896" stroke-width="0.5" opacity="0.5"/>
+  
+  <!-- Cabane Tchanquée stylisée -->
+  <g transform="translate(200, 55)">
+    <!-- Pilotis (poteaux) -->
+    <line x1="-25" y1="25" x2="-25" y2="55" stroke="#f2e8d5" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="25" y1="25" x2="25" y2="55" stroke="#f2e8d5" stroke-width="2.5" stroke-linecap="round"/>
+    
+    <!-- Plateforme -->
+    <line x1="-35" y1="25" x2="35" y2="25" stroke="#f2e8d5" stroke-width="2" stroke-linecap="round"/>
+    
+    <!-- Corps de la cabane -->
+    <rect x="-30" y="-15" width="60" height="40" fill="none" stroke="#f2e8d5" stroke-width="2" rx="1"/>
+    
+    <!-- Porte/Fenêtre -->
+    <rect x="-8" y="0" width="16" height="24" fill="none" stroke="#f2e8d5" stroke-width="1.5" rx="1"/>
+    <line x1="0" y1="0" x2="0" y2="24" stroke="#f2e8d5" stroke-width="1"/>
+    
+    <!-- Petites fenêtres latérales -->
+    <rect x="-25" y="-5" width="10" height="10" fill="none" stroke="#f2e8d5" stroke-width="1" rx="0.5"/>
+    <rect x="15" y="-5" width="10" height="10" fill="none" stroke="#f2e8d5" stroke-width="1" rx="0.5"/>
+    
+    <!-- Toit -->
+    <polygon points="-35,-15 0,-45 35,-15" fill="none" stroke="#f2e8d5" stroke-width="2" stroke-linejoin="round"/>
+    
+    <!-- Pic/flèche au sommet du toit -->
+    <line x1="0" y1="-45" x2="0" y2="-55" stroke="#f2e8d5" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="-4,-55 0,-62 4,-55" fill="#f2e8d5" stroke="none"/>
+    
+    <!-- Eau stylisée sous les pilotis -->
+    <path d="M-45,58 Q-35,55 -25,58 Q-15,61 -5,58 Q5,55 15,58 Q25,61 35,58 Q45,55 55,58" 
+          fill="none" stroke="#c9b896" stroke-width="1" opacity="0.6"/>
+  </g>
+  
+  <!-- Texte CLUB HOUSE -->
+  <text x="200" y="138" 
+        font-family="Georgia, 'Times New Roman', serif" 
+        font-size="26" 
+        font-weight="400"
+        fill="#f2e8d5" 
+        text-anchor="middle"
+        letter-spacing="8">CLUB HOUSE</text>
+  
+  <!-- Texte TCHANQUÉ -->
+  <text x="200" y="158" 
+        font-family="Georgia, 'Times New Roman', serif" 
+        font-size="14" 
+        font-weight="400"
+        fill="#c9b896" 
+        text-anchor="middle"
+        letter-spacing="6">TCHANQUÉ</text>
+  
+  <!-- Petits éléments décoratifs (lignes) -->
+  <line x1="70" y1="125" x2="120" y2="125" stroke="#c9b896" stroke-width="0.5" opacity="0.5"/>
+  <line x1="280" y1="125" x2="330" y2="125" stroke="#c9b896" stroke-width="0.5" opacity="0.5"/>
+</svg>
