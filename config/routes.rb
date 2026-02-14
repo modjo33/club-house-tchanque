@@ -32,5 +32,6 @@ Rails.application.routes.draw do
     resources :formulas, except: [:show]
     resources :page_contents, only: [:index, :edit, :update]
     resources :events, except: [:show]
+    resources :cuisine_images, except: [:show]
   end
 end

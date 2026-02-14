@@ -1,0 +1,46 @@
+<%= form_with model: [:admin, @cuisine_image], class: "space-y-6" do |f| %>
+  <% if @cuisine_image.errors.any? %>
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+      <ul>
+        <% @cuisine_image.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title, "Titre (optionnel)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= f.text_field :title, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", placeholder: "Ex: Burger maison" %>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div>
+      <%= f.label :position, "Position (ordre d'affichage)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.number_field :position, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-forest-500", min: 0 %>
+      <p class="text-xs text-gray-500 mt-1">0 = première image, 1 = deuxième, etc.</p>
+    </div>
+
+    <div class="flex items-center gap-3 pt-6">
+      <%= f.check_box :active, class: "w-4 h-4 text-forest-600 border-gray-300 rounded focus:ring-forest-500" %>
+      <%= f.label :active, "Image active (visible sur le site)", class: "text-sm font-medium text-gray-700" %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.label :image, "Image", class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <% if @cuisine_image.image.attached? %>
+      <div class="mb-3">
+        <%= image_tag @cuisine_image.image.variant(resize_to_limit: [300, 200]), class: "rounded shadow" %>
+        <p class="text-sm text-gray-500 mt-1">Image actuelle</p>
+      </div>
+    <% end %>
+    <%= f.file_field :image, accept: "image/*", class: "w-full border border-gray-300 rounded px-3 py-2", required: @cuisine_image.new_record? %>
+    <p class="text-xs text-gray-500 mt-1">Formats acceptés : JPG, PNG. Taille recommandée : 800x600.</p>
+  </div>
+
+  <div class="flex gap-4">
+    <%= f.submit "Enregistrer", class: "bg-forest-600 text-white px-6 py-2 rounded hover:bg-forest-700 transition-colors cursor-pointer" %>
+    <%= link_to "Annuler", admin_cuisine_images_path, class: "bg-gray-300 text-gray-700 px-6 py-2 rounded hover:bg-gray-400 transition-colors" %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_04_120003) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_14_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,16 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_04_120003) do
     t.datetime "updated_at", null: false
     t.string "section", default: "main"
     t.index ["page", "section", "position"], name: "index_carousel_images_on_page_and_section_and_position"
+  end
+
+  create_table "cuisine_images", force: :cascade do |t|
+    t.string "title"
+    t.integer "position", default: 0, null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_cuisine_images_on_active"
+    t.index ["position"], name: "index_cuisine_images_on_position"
   end
 
   create_table "events", force: :cascade do |t|
