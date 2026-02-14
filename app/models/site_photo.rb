@@ -25,10 +25,10 @@ class SitePhoto < ApplicationRecord
       default: "hero/terrasse-exterieur.jpg"
     },
     "home_cuisine" => {
-      label: "Accueil - Section Cuisine",
-      description: "Photo du plat dans la section 'Des produits frais'",
-      type: :single,
-      default: "plats/burger.jpg"
+      label: "Accueil - Carrousel Cuisine",
+      description: "Photos des plats dans la section 'Des produits frais' (carrousel automatique)",
+      type: :carousel,
+      defaults: ["plats/burger.jpg"]
     },
     "home_terrasse" => {
       label: "Accueil - Galerie Terrasse",

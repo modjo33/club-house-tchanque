@@ -104,12 +104,16 @@
           <% end %>
         </div>
 
-        <!-- Photo (droite) -->
-        <% cuisine_img = site_photo_for("home_cuisine") %>
+        <!-- Carrousel photos cuisine (droite) -->
+        <% cuisine_images = site_photos_for("home_cuisine") %>
         <div data-controller="scroll-animation" data-scroll-animation-animation-value="fade-in-right">
-          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-            <img src="<%= cuisine_img[:url] %>" alt="<%= cuisine_img[:alt] %>" class="w-full h-full object-cover" loading="lazy">
-          </div>
+          <% if cuisine_images.size > 1 %>
+            <%= render "shared/carousel", images: cuisine_images, options: { height: "aspect-[4/3]", autoplay: true, show_arrows: true, show_indicators: true } %>
+          <% else %>
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+              <img src="<%= cuisine_images.first[:url] %>" alt="<%= cuisine_images.first[:alt] %>" class="w-full h-full object-cover" loading="lazy">
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
