@@ -104,24 +104,12 @@
           <% end %>
         </div>
 
-        <!-- Carrousel photos cuisine (droite) -->
+        <!-- Photo (droite) -->
+        <% cuisine_img = site_photo_for("home_cuisine") %>
         <div data-controller="scroll-animation" data-scroll-animation-animation-value="fade-in-right">
-          <% if @cuisine_images.any? %>
-            <% carousel_imgs = @cuisine_images.select { |ci| ci.image.attached? }.map { |ci| { url: url_for(ci.image), alt: ci.title.presence || "Cuisine maison" } } %>
-            <% if carousel_imgs.any? %>
-              <%= render "shared/carousel", images: carousel_imgs, options: { autoplay: true, height: "aspect-[4/3]", rounded: "rounded-2xl", show_arrows: true, show_indicators: true } %>
-            <% else %>
-              <% cuisine_img = site_photo_for("home_cuisine") %>
-              <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                <img src="<%= cuisine_img[:url] %>" alt="<%= cuisine_img[:alt] %>" class="w-full h-full object-cover" loading="lazy">
-              </div>
-            <% end %>
-          <% else %>
-            <% cuisine_img = site_photo_for("home_cuisine") %>
-            <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-              <img src="<%= cuisine_img[:url] %>" alt="<%= cuisine_img[:alt] %>" class="w-full h-full object-cover" loading="lazy">
-            </div>
-          <% end %>
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+            <img src="<%= cuisine_img[:url] %>" alt="<%= cuisine_img[:alt] %>" class="w-full h-full object-cover" loading="lazy">
+          </div>
         </div>
       </div>
     </div>

@@ -3,7 +3,6 @@ class PagesController < ApplicationController
     @page_title = "Restaurant Club House Tchanqué | Villenave d'Ornon | Vue sur le Golf"
     @page_description = "Restaurant ouvert à tous au cœur du golf de Villenave d'Ornon. Cuisine maison, produits frais, grande terrasse avec vue panoramique sur le lac. Réservations : 09 61 63 15 27"
     @page_keywords = "restaurant villenave d'ornon, restaurant golf bordeaux, terrasse vue lac, cuisine maison bordeaux"
-    @cuisine_images = CuisineImage.for_carousel
   end
 
   def carte

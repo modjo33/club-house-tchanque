@@ -8,7 +8,5 @@ class Admin::DashboardController < Admin::BaseController
     @page_contents_count = PageContent.count
     @events_count = Event.count
     @active_events_count = Event.current_events.count
-    @cuisine_images_count = CuisineImage.count
-    @active_cuisine_images_count = CuisineImage.active.count
   end
 end
