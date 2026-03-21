@@ -28,107 +28,75 @@
     <div class="max-w-2xl mx-auto">
 
       <%# NOS ENTRÉES %>
-      <div class="mb-20" data-controller="scroll-animation">
-        <h2 class="text-3xl font-serif font-bold text-forest-800 mb-10 text-center">
-          Nos entrées
-        </h2>
+      <% if @entrees.any? %>
+        <div class="mb-20" data-controller="scroll-animation">
+          <h2 class="text-3xl font-serif font-bold text-forest-800 mb-10 text-center">
+            Nos entrées
+          </h2>
 
-        <div class="space-y-6">
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Oeuf Mimosa</span>
-            <span class="font-semibold text-forest-600">9 €</span>
-          </div>
-
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Camembert Rôti</span>
-            <span class="font-semibold text-forest-600">13 €</span>
-          </div>
-
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Jambon Serrano</span>
-            <span class="font-semibold text-forest-600">15 €</span>
+          <div class="space-y-6">
+            <% @entrees.each do |item| %>
+              <div class="border-b border-dotted border-sage-300 pb-2">
+                <div class="flex justify-between items-baseline">
+                  <span class="font-medium text-forest-800 pr-4"><%= item.name %></span>
+                  <span class="font-semibold text-forest-600"><%= item.formatted_price %></span>
+                </div>
+                <% if item.description.present? %>
+                  <p class="text-sm text-sage-600 mt-1"><%= item.description %></p>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
-      </div>
+      <% end %>
 
       <%# NOS PLATS %>
-      <div class="mb-20" data-controller="scroll-animation">
-        <h2 class="text-3xl font-serif font-bold text-forest-800 mb-10 text-center">
-          Nos plats
-        </h2>
+      <% if @plats.any? %>
+        <div class="mb-20" data-controller="scroll-animation">
+          <h2 class="text-3xl font-serif font-bold text-forest-800 mb-10 text-center">
+            Nos plats
+          </h2>
 
-        <div class="space-y-6">
-          <div class="border-b border-dotted border-sage-300 pb-2">
-            <div class="flex justify-between items-baseline">
-              <span class="font-medium text-forest-800 pr-4">Pâtes du Jour</span>
-              <span class="font-semibold text-forest-600">15 €</span>
-            </div>
-            <p class="text-sm text-sage-600 mt-1">Parmesan, oignon, pignons, piment d'Espelette, huile de Basilic maison</p>
+          <div class="space-y-6">
+            <% @plats.each do |item| %>
+              <div class="border-b border-dotted border-sage-300 pb-2">
+                <div class="flex justify-between items-baseline">
+                  <span class="font-medium text-forest-800 pr-4"><%= item.name %></span>
+                  <span class="font-semibold text-forest-600"><%= item.formatted_price %></span>
+                </div>
+                <% if item.description.present? %>
+                  <p class="text-sm text-sage-600 mt-1"><%= item.description %></p>
+                <% end %>
+              </div>
+            <% end %>
+
+            <p class="text-center text-sage-600 italic pt-4">Suggestions à l'ardoise selon arrivages</p>
           </div>
-
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Plat du Jour</span>
-            <span class="font-semibold text-forest-600">15 €</span>
-          </div>
-
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Salade César</span>
-            <span class="font-semibold text-forest-600">19 €</span>
-          </div>
-
-          <div class="border-b border-dotted border-sage-300 pb-2">
-            <div class="flex justify-between items-baseline">
-              <span class="font-medium text-forest-800 pr-4">Tartare à l'Italienne</span>
-              <span class="font-semibold text-forest-600">21 €</span>
-            </div>
-            <p class="text-sm text-sage-600 mt-1">Parmesan, oignon, pignons, piment d'Espelette, huile de Basilic maison</p>
-          </div>
-
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Fish and Chips</span>
-            <span class="font-semibold text-forest-600">21 €</span>
-          </div>
-
-          <div class="border-b border-dotted border-sage-300 pb-2">
-            <div class="flex justify-between items-baseline">
-              <span class="font-medium text-forest-800 pr-4">Bô Bun au Poulet Croustillant</span>
-              <span class="font-semibold text-forest-600">21 €</span>
-            </div>
-            <p class="text-sm text-sage-600 mt-1">Fines noodles, salade romaine, nems de porc sauce Bo bun, cacahuètes, oignons frits</p>
-          </div>
-
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Assiette du Golfeur</span>
-            <span class="font-semibold text-forest-600">21 €</span>
-          </div>
-
-          <p class="text-center text-sage-600 italic pt-4">Suggestions à l'ardoise selon arrivages</p>
         </div>
-      </div>
+      <% end %>
 
       <%# NOS DESSERTS %>
-      <div class="mb-16" data-controller="scroll-animation">
-        <h2 class="text-3xl font-serif font-bold text-forest-800 mb-10 text-center">
-          Nos desserts
-        </h2>
+      <% if @desserts.any? %>
+        <div class="mb-16" data-controller="scroll-animation">
+          <h2 class="text-3xl font-serif font-bold text-forest-800 mb-10 text-center">
+            Nos desserts
+          </h2>
 
-        <div class="space-y-6">
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Gaufre Liégeoise au Caramel</span>
-            <span class="font-semibold text-forest-600">8 €</span>
-          </div>
-
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Pavlova au Coulis de Fruits Rouges</span>
-            <span class="font-semibold text-forest-600">9 €</span>
-          </div>
-
-          <div class="flex justify-between items-baseline border-b border-dotted border-sage-300 pb-2">
-            <span class="font-medium text-forest-800 pr-4">Café Gourmand</span>
-            <span class="font-semibold text-forest-600">10 €</span>
+          <div class="space-y-6">
+            <% @desserts.each do |item| %>
+              <div class="border-b border-dotted border-sage-300 pb-2">
+                <div class="flex justify-between items-baseline">
+                  <span class="font-medium text-forest-800 pr-4"><%= item.name %></span>
+                  <span class="font-semibold text-forest-600"><%= item.formatted_price %></span>
+                </div>
+                <% if item.description.present? %>
+                  <p class="text-sm text-sage-600 mt-1"><%= item.description %></p>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
-      </div>
+      <% end %>
 
     </div>
   </div>
@@ -146,25 +114,15 @@
 
       <div class="grid md:grid-cols-3 gap-8" data-controller="scroll-animation" data-scroll-animation-animation-value="fade-in">
 
-        <%# Menu du jour %>
-        <div class="bg-white rounded-2xl p-8 text-center">
-          <h3 class="text-xl font-serif font-bold text-forest-800 mb-4">Menu du jour</h3>
-          <p class="text-forest-700 mb-2">Entrée/Plat ou Plat/Dessert</p>
-          <p class="text-4xl font-bold text-forest-600 mb-4">22 €</p>
-          <div class="border-t border-sage-200 pt-4 mt-4">
-            <p class="text-forest-700">Entrée + Plat + Dessert</p>
-            <p class="text-4xl font-bold text-forest-600 mt-1">24 €</p>
+        <% @formulas.each do |formula| %>
+          <div class="bg-white rounded-2xl p-8 text-center">
+            <h3 class="text-xl font-serif font-bold text-forest-800 mb-4"><%= formula.name %></h3>
+            <% if formula.description.present? %>
+              <p class="text-forest-700 mb-2"><%= formula.description %></p>
+            <% end %>
+            <p class="text-4xl font-bold text-forest-600 mb-4"><%= formula.formatted_price %></p>
           </div>
-          <p class="text-sm text-sage-600 italic mt-4">Nouveau menu chaque jour</p>
-        </div>
-
-        <%# Menu enfant %>
-        <div class="bg-white rounded-2xl p-8 text-center">
-          <h3 class="text-xl font-serif font-bold text-forest-800 mb-2">Le petit golfeur</h3>
-          <p class="text-sage-600 text-sm mb-6">Menu enfant</p>
-          <p class="text-3xl font-bold text-forest-700 mb-4">12,50 €</p>
-          <p class="text-sm text-forest-600">Plat + Boisson + Dessert</p>
-        </div>
+        <% end %>
 
         <%# Groupes %>
         <div class="bg-white rounded-2xl p-8 text-center flex flex-col">

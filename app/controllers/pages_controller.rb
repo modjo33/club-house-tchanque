@@ -9,12 +9,19 @@ class PagesController < ApplicationController
     @page_title = "La Carte | Restaurant Club House Tchanqué | Villenave d'Ornon"
     @page_description = "Découvrez notre carte : entrées, plats du jour, desserts maison. Formules midi à partir de 15€. Cuisine de saison avec produits frais."
     @page_keywords = "carte restaurant, menu villenave d'ornon, plat du jour, formule midi, cuisine de saison"
+    @entrees = MenuItem.by_category("entrees")
+    @plats = MenuItem.by_category("plats")
+    @desserts = MenuItem.by_category("desserts")
+    @formulas = Formula.ordered
   end
 
   def vins
     @page_title = "Carte des Vins | Restaurant Club House Tchanqué"
     @page_description = "Notre sélection de vins : Bordeaux, Pessac-Léognan, Côtes du Rhône. Vins au verre ou à la bouteille."
     @page_keywords = "carte des vins, vins bordeaux, pessac-léognan, côtes du rhône, vin au verre"
+    @blancs = WineItem.by_category("blanc")
+    @roses = WineItem.by_category("rose")
+    @rouges = WineItem.by_category("rouge")
   end
 
   def boissons

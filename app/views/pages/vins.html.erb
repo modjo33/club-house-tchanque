@@ -34,251 +34,64 @@
         <p class="text-lg text-forest-700 italic">Une sélection de vins soigneusement choisis pour accompagner vos repas</p>
       </div>
 
-      <!-- Vins Blancs -->
-      <div class="wine-category mb-16" data-controller="scroll-animation">
-        <div class="flex items-center gap-4 mb-8">
-          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent hidden md:block"></div>
-          <div class="flex items-center gap-3">
-            <span class="w-5 h-5 rounded-full bg-amber-200 border-2 border-amber-400"></span>
-            <h2 class="text-xl md:text-3xl font-serif font-bold text-forest-800">Notre sélection de vins blancs</h2>
+      <%# Helper pour générer une section de vins %>
+      <% wine_sections = [
+        { wines: @blancs, label: "Notre sélection de vins blancs", color_bg: "bg-amber-200", color_border: "border-amber-400" },
+        { wines: @roses, label: "Notre sélection de vins rosés", color_bg: "bg-pink-300", color_border: "border-pink-400" },
+        { wines: @rouges, label: "Notre sélection de vins rouges", color_bg: "bg-red-800", color_border: "border-red-900" }
+      ] %>
+
+      <% wine_sections.each do |section| %>
+        <% next if section[:wines].empty? %>
+        <div class="wine-category mb-16" data-controller="scroll-animation">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent hidden md:block"></div>
+            <div class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full <%= section[:color_bg] %> border-2 <%= section[:color_border] %>"></span>
+              <h2 class="text-xl md:text-3xl font-serif font-bold text-forest-800"><%= section[:label] %></h2>
+            </div>
+            <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent hidden md:block"></div>
           </div>
-          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent hidden md:block"></div>
-        </div>
 
-        <div class="bg-white rounded-xl shadow-lg overflow-x-auto">
-          <table class="w-full min-w-[400px]">
-            <thead>
-              <tr class="bg-forest-800 text-white">
-                <th class="py-4 px-6 text-left font-serif">Vin</th>
-                <th class="py-4 px-4 text-center font-serif w-24">Verre</th>
-                <th class="py-4 px-4 text-center font-serif w-28">Bouteille</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-cream-200">
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Louvetier</p>
-                  <p class="text-sm text-forest-600 italic">Bordeaux</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-gold-100 text-gold-700 font-bold px-3 py-1 rounded-full">6€</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">26€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Bal des Papillons</p>
-                  <p class="text-sm text-forest-600 italic">Côtes de Gascogne</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-gold-100 text-gold-700 font-bold px-3 py-1 rounded-full">7€</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">27€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Belleruche</p>
-                  <p class="text-sm text-forest-600 italic">Côtes du Rhône</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-gold-100 text-gold-700 font-bold px-3 py-1 rounded-full">8€</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">31€</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Vins Rosés -->
-      <div class="wine-category mb-16" data-controller="scroll-animation">
-        <div class="flex items-center gap-4 mb-8">
-          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent hidden md:block"></div>
-          <div class="flex items-center gap-3">
-            <span class="w-5 h-5 rounded-full bg-pink-300 border-2 border-pink-400"></span>
-            <h2 class="text-xl md:text-3xl font-serif font-bold text-forest-800">Notre sélection de vins rosés</h2>
+          <div class="bg-white rounded-xl shadow-lg overflow-x-auto">
+            <table class="w-full min-w-[400px]">
+              <thead>
+                <tr class="bg-forest-800 text-white">
+                  <th class="py-4 px-6 text-left font-serif">Vin</th>
+                  <th class="py-4 px-4 text-center font-serif w-24">Verre</th>
+                  <th class="py-4 px-4 text-center font-serif w-28">Bouteille</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-cream-200">
+                <% section[:wines].each do |wine| %>
+                  <tr class="hover:bg-cream-50 transition-colors">
+                    <td class="py-4 px-6">
+                      <p class="font-semibold text-forest-800"><%= wine.name %></p>
+                      <% if wine.appellation.present? %>
+                        <p class="text-sm text-forest-600 italic"><%= wine.appellation %></p>
+                      <% end %>
+                    </td>
+                    <td class="py-4 px-4 text-center">
+                      <% if wine.glass_price.present? %>
+                        <span class="inline-block bg-gold-100 text-gold-700 font-bold px-3 py-1 rounded-full"><%= wine.formatted_glass_price %></span>
+                      <% else %>
+                        <span class="text-forest-400">—</span>
+                      <% end %>
+                    </td>
+                    <td class="py-4 px-4 text-center">
+                      <% if wine.bottle_price.present? %>
+                        <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full"><%= wine.formatted_bottle_price %></span>
+                      <% else %>
+                        <span class="text-forest-400">—</span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
           </div>
-          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent hidden md:block"></div>
         </div>
-
-        <div class="bg-white rounded-xl shadow-lg overflow-x-auto">
-          <table class="w-full min-w-[400px]">
-            <thead>
-              <tr class="bg-forest-800 text-white">
-                <th class="py-4 px-6 text-left font-serif">Vin</th>
-                <th class="py-4 px-4 text-center font-serif w-24">Verre</th>
-                <th class="py-4 px-4 text-center font-serif w-28">Bouteille</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-cream-200">
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Louvetier</p>
-                  <p class="text-sm text-forest-600 italic">Bordeaux</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-gold-100 text-gold-700 font-bold px-3 py-1 rounded-full">6€</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">26€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Haut de Masterel</p>
-                  <p class="text-sm text-forest-600 italic">Côtes de Provence</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-gold-100 text-gold-700 font-bold px-3 py-1 rounded-full">7€</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">30€</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Vins Rouges -->
-      <div class="wine-category mb-16" data-controller="scroll-animation">
-        <div class="flex items-center gap-4 mb-8">
-          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent hidden md:block"></div>
-          <div class="flex items-center gap-3">
-            <span class="w-5 h-5 rounded-full bg-red-800 border-2 border-red-900"></span>
-            <h2 class="text-xl md:text-3xl font-serif font-bold text-forest-800">Notre sélection de vins rouges</h2>
-          </div>
-          <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent hidden md:block"></div>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-lg overflow-x-auto">
-          <table class="w-full min-w-[400px]">
-            <thead>
-              <tr class="bg-forest-800 text-white">
-                <th class="py-4 px-6 text-left font-serif">Vin</th>
-                <th class="py-4 px-4 text-center font-serif w-24">Verre</th>
-                <th class="py-4 px-4 text-center font-serif w-28">Bouteille</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-cream-200">
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Louvetier</p>
-                  <p class="text-sm text-forest-600 italic">Bordeaux</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-gold-100 text-gold-700 font-bold px-3 py-1 rounded-full">6€</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">26€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">El Grano</p>
-                  <p class="text-sm text-forest-600 italic">Chilien Carménère</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-gold-100 text-gold-700 font-bold px-3 py-1 rounded-full">7€</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">27€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Belleruche</p>
-                  <p class="text-sm text-forest-600 italic">Côtes du Rhône</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="text-forest-400">—</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">31€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Ch. St Aubin</p>
-                  <p class="text-sm text-forest-600 italic">Médoc</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="text-forest-400">—</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">32€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Dame de la Solitude</p>
-                  <p class="text-sm text-forest-600 italic">Graves</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="text-forest-400">—</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">37€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Terrasses de la Garde</p>
-                  <p class="text-sm text-forest-600 italic">Pessac-Léognan</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-gold-100 text-gold-700 font-bold px-3 py-1 rounded-full">9€</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">39€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Étoile de Nouchet</p>
-                  <p class="text-sm text-forest-600 italic">Pessac-Léognan</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="text-forest-400">—</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">42€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Meysonniers</p>
-                  <p class="text-sm text-forest-600 italic">Crozes Hermitage</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="text-forest-400">—</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">43€</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-cream-50 transition-colors">
-                <td class="py-4 px-6">
-                  <p class="font-semibold text-forest-800">Coccinelle Petit Bocq</p>
-                  <p class="text-sm text-forest-600 italic">St Estèphe</p>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="text-forest-400">—</span>
-                </td>
-                <td class="py-4 px-4 text-center">
-                  <span class="inline-block bg-forest-100 text-forest-700 font-bold px-3 py-1 rounded-full">49€</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <% end %>
 
       <!-- Note -->
       <div class="text-center mt-12 p-6 bg-forest-800 rounded-xl text-white">

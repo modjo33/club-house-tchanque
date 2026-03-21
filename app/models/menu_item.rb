@@ -18,6 +18,12 @@ class MenuItem < ApplicationRecord
   end
 
   def formatted_price
-    "#{price.to_i}€"
+    if price.nil? || price.zero?
+      "Selon arrivage"
+    elsif price == price.to_i
+      "#{price.to_i} €"
+    else
+      "#{price} €"
+    end
   end
 end

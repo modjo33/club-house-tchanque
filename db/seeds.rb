@@ -99,9 +99,11 @@ puts "Creating menu items..."
 MenuItem.destroy_all
 
 [
-  { name: "Oeuf Mimosa", description: nil, price: 9, position: 0 },
-  { name: "Camembert Rôti", description: nil, price: 13, position: 1 },
-  { name: "Jambon Serrano", description: nil, price: 15, position: 2 }
+  { name: "Oeufs pochés à la crème de ciboulette", description: nil, price: 9, position: 0 },
+  { name: "Gravlax de poisson", description: "Selon l'arrivage, vinaigrette exotique", price: 14, position: 1 },
+  { name: "Camembert rôti", description: nil, price: 13, position: 2 },
+  { name: "Planche mixte", description: "Charcuteries et fromages", price: 12, position: 3 },
+  { name: "Salade de Cabécou", description: "Salade, Cabécou, lardons, tomates, carottes, croutons", price: 19, position: 4 }
 ].each do |item|
   MenuItem.create!(
     name: item[:name],
@@ -114,13 +116,15 @@ end
 
 # PLATS
 [
-  { name: "Pâtes du Jour", description: "Parmesan, oignon, pignons, piment d'Espelette, huile de Basilic maison", price: 15, position: 0 },
-  { name: "Plat du Jour", description: nil, price: 15, position: 1 },
-  { name: "Salade César", description: nil, price: 19, position: 2 },
-  { name: "Tartare à l'Italienne", description: "Parmesan, oignon, pignons, piment d'Espelette, huile de Basilic maison", price: 21, position: 3 },
-  { name: "Fish and Chips", description: nil, price: 21, position: 4 },
-  { name: "Bô Bun au Poulet Croustillant", description: "Fines noodles, salade romaine, nems de porc sauce Bo bun, cacahuètes, oignons frits", price: 21, position: 5 },
-  { name: "Assiette du Golfeur", description: nil, price: 21, position: 6 }
+  { name: "Plat ou Pâtes du jour", description: nil, price: 15, position: 0 },
+  { name: "Salade César", description: "Poulet croustillant, tomates, oeufs, croutons, Grana Padano 10 mois", price: 19, position: 1 },
+  { name: "Crousti-Burger", description: "Poulet pané maison, sauce cheddar, frites, tomate", price: 20, position: 2 },
+  { name: "Camembert rôti", description: "Frites et salade", price: 17, position: 3 },
+  { name: "Cordon bleu maison", description: nil, price: 21, position: 4 },
+  { name: "Bo bun de Poulet", description: "Noodles, salade, carottes, nems de poulet, cacahuètes, oignons frits, sauce bo-bun, menthe, coriandre", price: 21, position: 5 },
+  { name: "Assiette du Golfeur", description: nil, price: 22, position: 6 },
+  { name: "Pièce de boeuf", description: "Selon arrivage", price: 0, position: 7 },
+  { name: "Poisson du moment", description: "Selon l'arrivage, mousseline de carottes et paprika fumé, petits légumes", price: 26, position: 8 }
 ].each do |item|
   MenuItem.create!(
     name: item[:name],
@@ -133,9 +137,12 @@ end
 
 # DESSERTS
 [
-  { name: "Gaufre Liégeoise au Caramel", description: nil, price: 8, position: 0 },
-  { name: "Pavlova au Coulis de Fruits Rouges", description: nil, price: 9, position: 1 },
-  { name: "Café Gourmand", description: nil, price: 10, position: 2 }
+  { name: "Ile flottante au caramel", description: "Blanc en neige maison, crème anglaise, caramel et amandes torréfiées", price: 8, position: 0 },
+  { name: "Gaufre liégeoise caramel", description: nil, price: 9, position: 1 },
+  { name: "Tarte de saison", description: nil, price: 9, position: 2 },
+  { name: "Coulant au chocolat", description: "Glace Vanille", price: 9, position: 3 },
+  { name: "Assiettes de fromages", description: nil, price: 10, position: 4 },
+  { name: "Café gourmand", description: "Assortiment de 4 desserts", price: 10, position: 5 }
 ].each do |item|
   MenuItem.create!(
     name: item[:name],
@@ -160,8 +167,8 @@ WineItem.destroy_all
   { name: "El Grano", appellation: "Chilien Carménère", glass_price: 7, bottle_price: 27, position: 1 },
   { name: "Belleruche", appellation: "Côtes du Rhône", glass_price: nil, bottle_price: 31, position: 2 },
   { name: "Ch. St Aubin", appellation: "Médoc", glass_price: nil, bottle_price: 32, position: 3 },
-  { name: "Dame de la Solitude", appellation: "Graves", glass_price: nil, bottle_price: 37, position: 4 },
-  { name: "Terrasses de la Garde", appellation: "Pessac-Léognan", glass_price: 9, bottle_price: 39, position: 5 },
+  { name: "Dame de la Solitude", appellation: "Graves", glass_price: nil, bottle_price: 39, position: 4 },
+  { name: "Pessac-Léognan", appellation: "Pessac-Léognan", glass_price: 9, bottle_price: 35, position: 5 },
   { name: "Étoile de Nouchet", appellation: "Pessac-Léognan", glass_price: nil, bottle_price: 42, position: 6 },
   { name: "Meysonniers", appellation: "Crozes Hermitage", glass_price: nil, bottle_price: 43, position: 7 },
   { name: "Coccinelle Petit Bocq", appellation: "St Estèphe", glass_price: nil, bottle_price: 49, position: 8 }
@@ -195,7 +202,7 @@ end
 # Vins rosés
 [
   { name: "Louvetier", appellation: "Bordeaux", glass_price: 6, bottle_price: 26, position: 0 },
-  { name: "Haut de Masterel", appellation: "Côtes de Provence", glass_price: 7, bottle_price: 30, position: 1 }
+  { name: "Haut de Masterel", appellation: "Côtes de Provence", glass_price: 8, bottle_price: 31, position: 1 }
 ].each do |item|
   WineItem.create!(
     name: item[:name],
@@ -215,8 +222,9 @@ puts "Creating formulas..."
 Formula.destroy_all
 
 [
-  { name: "Entrée/Plat ou Plat/Dessert", description: nil, price: 22, position: 0 },
-  { name: "Entrée + Plat + Dessert", description: nil, price: 24, position: 1 }
+  { name: "Menu du jour", description: "Entrée/plat ou plat/dessert — Hors week-end et jours fériés", price: 22, position: 0 },
+  { name: "Menu du jour complet", description: "Entrée/plat/dessert — Hors week-end et jours fériés", price: 24, position: 1 },
+  { name: "Menu Enfant", description: "Boisson (sirop, limonade, diabolo, coca), Poulet croustillant ou burger de poulet, ou plat du jour, Gaufre ou Glace ou Dessert du jour — Selon disponibilité", price: 12.50, position: 2 }
 ].each do |item|
   Formula.create!(
     name: item[:name],
@@ -299,12 +307,11 @@ end
 
 # LES APÉRITIFS
 [
-  { name: "Ricard/Pastis 4cl", price: 4, position: 0 },
+  { name: "Ricard/Pastis 4cl", price: 5, position: 0 },
   { name: "Martini 6cl", price: 6, position: 1 },
   { name: "Kir, Coupe de Prosecco 12.5cl", price: 7, position: 2 },
   { name: "Lillet, Campari 6cl", price: 7, position: 3 },
-  { name: "Kir Royal au Prosecco 12.5cl", price: 9, position: 4 },
-  { name: "Americano 8cl", price: 9, position: 5 }
+  { name: "Kir Royal au Prosecco 12.5cl", price: 9, position: 4 }
 ].each do |item|
   Beverage.create!(
     name: item[:name],
@@ -317,14 +324,15 @@ end
 
 # LES COCKTAILS
 [
-  { name: "Caipirinha", description: "Cachaça, citron vert, cassonade", price: 10, position: 0 },
-  { name: "Aperol Spritz", description: "Aperol, Prosecco, eau gazeuse", price: 10, position: 1 },
-  { name: "St Germain Spritz", description: "St Germain, Prosecco, eau gazeuse", price: 12, position: 2 },
-  { name: "Pina Colada", description: "Rhum, jus d'ananas, coco", price: 10, position: 3 },
-  { name: "Kraken Dark'n'Stormy", description: "Rhum, ginger beer, citron vert, cassonade", price: 10, position: 4 },
-  { name: "Moscow Mule", description: "Vodka, ginger beer, citron vert, cassonade", price: 10, position: 5 },
-  { name: "Tchanqué Gin", description: "Choisissez votre gin et soft !", price: 12, position: 6 },
-  { name: "Mojito", description: "Rhum, eau gazeuse, citron vert, cassonade, menthe", price: 10, position: 7 }
+  { name: "Americano", description: "Martini rouge & blanc, Campari, Gin", price: 10, position: 0 },
+  { name: "Caipirinha", description: "Cachaça, citron vert, cassonade", price: 10, position: 1 },
+  { name: "Aperol Spritz", description: "Aperol, Prosecco, eau gazeuse", price: 10, position: 2 },
+  { name: "St Germain Spritz", description: "Liqueur de sureau, Prosecco, eau gazeuse", price: 12, position: 3 },
+  { name: "Pina Colada", description: "Rhum, jus d'ananas, coco", price: 10, position: 4 },
+  { name: "Kraken Dark'n'Stormy", description: "Rhum, ginger beer, citron vert, cassonade", price: 10, position: 5 },
+  { name: "Moscow Mule", description: "Vodka, ginger beer, citron vert, cassonade", price: 10, position: 6 },
+  { name: "Tchanqué Gin", description: "Choisissez votre gin & votre soft !", price: 12, position: 7 },
+  { name: "Mojito", description: "Rhum, eau gazeuse, citron vert, cassonade, menthe", price: 10, position: 8 }
 ].each do |item|
   Beverage.create!(
     name: item[:name],

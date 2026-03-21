@@ -6,6 +6,10 @@ class Formula < ApplicationRecord
   scope :ordered, -> { order(:position) }
 
   def formatted_price
-    "#{price.to_i}€"
+    if price == price.to_i
+      "#{price.to_i} €"
+    else
+      "#{price.to_s.gsub('.', ',')} €"
+    end
   end
 end
