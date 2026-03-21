@@ -115,12 +115,16 @@
       <div class="grid md:grid-cols-3 gap-8" data-controller="scroll-animation" data-scroll-animation-animation-value="fade-in">
 
         <% @formulas.each do |formula| %>
+          <% parts = formula.description.present? ? formula.description.split(" — ", 2) : [] %>
           <div class="bg-white rounded-2xl p-8 text-center">
             <h3 class="text-xl font-serif font-bold text-forest-800 mb-4"><%= formula.name %></h3>
-            <% if formula.description.present? %>
-              <p class="text-forest-700 mb-2"><%= formula.description %></p>
+            <% if parts.first.present? %>
+              <p class="text-forest-700 mb-2"><%= parts.first %></p>
             <% end %>
-            <p class="text-4xl font-bold text-forest-600 mb-4"><%= formula.formatted_price %></p>
+            <p class="text-4xl font-bold text-forest-600 mb-2"><%= formula.formatted_price %></p>
+            <% if parts.second.present? %>
+              <p class="text-sm text-sage-500 italic"><%= parts.second %></p>
+            <% end %>
           </div>
         <% end %>
 
